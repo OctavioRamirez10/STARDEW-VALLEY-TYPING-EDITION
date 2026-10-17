@@ -1,107 +1,205 @@
-# 🌾 STARDEW VALLEY // TYPING EDITION (PELICAN TOWN)
+<div align="center">
 
-> **Suite Definitiva de Aprendizaje de Mecanografía Táctil (Touch Typing) ambientada en el universo de Stardew Valley**. Diseñado para aprender la posición anatómica de cada dedo sin mirar el teclado físico, cuidar la huerta del abuelo, descender a la peligrosa Caverna Calavera, salvar el Centro Cívico con los Junimos y alcanzar la Verdadera Perfección con 100 niveles progresivos.
+# 🌾 STARDEW VALLEY // TYPING EDITION 🐔
+
+> **La Suite Definitiva de Aprendizaje de Mecanografía Táctil (Touch Typing) ambientada en Pelican Town.**  
+> *Aprende la posición anatómica de cada dedo sin mirar el teclado físico, cuida la huerta del abuelo, desciende a la peligrosa Caverna Calavera, restaura el Centro Cívico con los Junimos y completa el Museo de Gunther hasta alcanzar la Verdadera Perfección.*
+
+<br/>
+
+[![Jugar Online](https://img.shields.io/badge/▶_JUGAR_ONLINE-GitHub_Pages-2ea44f?style=for-the-badge&logo=github)](https://octavioramirez10.github.io/STARDEW-VALLEY-TYPING-EDITION/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla%20ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-Semántico-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-Pixel%20Art%20Theme-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
+[![Web Audio API](https://img.shields.io/badge/Audio-Web%20Audio%20Sintetizado-7952B3?style=for-the-badge)](https://developer.mozilla.org/es/docs/Web/API/Web_Audio_API)
+[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg?style=for-the-badge)](./LICENSE)
+
+<br/>
+
+[🎮 Jugar Ahora](#-cómo-jugar-en-tu-navegador) • [✨ Características](#-características-destacadas) • [🕹️ Modos de Juego](#️-los-9-modos-de-juego) • [🗺️ Sectores de Estudio](#-el-plan-de-estudio-10-sectores-100-niveles) • [🎧 Audio Web](#-motor-de-audio-sintetizado-web-audio-api) • [🚀 Despliegue](#-despliegue-en-github-pages)
 
 ---
 
-## 🎮 Modos de Juego Principales
+</div>
 
-### 1. 🌱 Tareas de la Granja (100 Niveles Progresivos en 10 Sectores)
-* **Sector 01: La Parcela del Abuelo (Niveles 1 a 10)** ➔ Posición base anatómica, fila guía (`ASDF` y `JKLÑ`), marcas táctiles de homing (`F` y `J`), estiramientos centrales (`G` y `H`), azada y primeras chirivías.
-* **Sector 02: Huerto de Primavera & Pierre (Niveles 11 a 20)** ➔ Fila superior (`QWERTYUIOP`), patatas, coliflores, fresas, semillas y la tienda de Pierre.
-* **Sector 03: Las Minas de la Montaña (Niveles 21 a 30)** ➔ Fila inferior (`ZXCVBNM,.-`), picos de minero, cobre, hierro, carbón, murciélagos y geodas de Clint.
-* **Sector 04: La Playa de Willy & Pesca (Niveles 31 a 40)** ➔ Shift de mano cruzada, mayúsculas sostenidas, cañas de bambú, carpas, bagres, boyas y el muelle de madera.
-* **Sector 05: Rancho de Marnie & Animales (Niveles 41 a 50)** ➔ Vocales acentuadas (`á, é, í, ó, ú`), signos dobles (`¡! ¿?`), vacas, gallinas azules de Shane, mayonesa dorada y queso curado.
-* **Sector 06: El Centro Cívico & Lotes Junimo (Niveles 51 a 60)** ➔ Fila numérica (`1` al `0`), monedero de oro (`$g`), lotes de la despensa, caldera, acuario y magia de los Junimos.
-* **Sector 07: El Bosque Tizón & Torre del Mago (Niveles 61 a 70)** ➔ Símbolos especiales (`# $ % & * + = ~ ^ | \`), madera noble, pociones del caldero de Rasmodius y chozas Junimo.
-* **Sector 08: Feria de Stardew Valley & Festivales (Niveles 71 a 80)** ➔ Concurso de exhibición del alcalde Lewis, tarta de calabaza, sidra añejada, rueda de la fortuna y minijuegos del pueblo.
-* **Sector 09: La Caverna Calavera del Desierto (Niveles 81 a 90)** ➔ Autobús de Pam, bombas gigantes, momias, fragmentos prismáticos y vetas de iridio puro.
-* **Sector 10: La Cumbre de la Verdadera Perfección (Niveles 91 a 100)** ➔ El desafío supremo del Sr. Qi: textos de alta velocidad a 90, 100, 110 y **120 PPM con 98% de precisión mínima** para coronarte como *Leyenda Eterna de Stardew Valley*.
+## 📖 ¿De qué se trata el juego?
+
+**Stardew Valley: Typing Edition** convierte el entrenamiento de mecanografía en un RPG acogedor (*cozy game*). Tanto si eres fanático veterano de *Stardew Valley* como si nunca has jugado un videojuego de granjas, la experiencia está pensada para **todo público**:
+
+* 🖐️ **Guía anatómica de dedos**: Cada fila y tecla tiene asignado el color del dedo correspondiente (meñiques, anulares, medios e índices).
+* 🌾 **Progresión orgánica**: Cada pulsación limpia malas hierbas, riega cultivos, pica minerales o encanta pergaminos Junimo.
+* ⚡ **Métricas reales**: Medición en vivo de **PPM (Palabras Por Minuto)**, **Precisión (%)**, **Rachas de Combo**, y rangos de calidad de cosecha (**Normal, Plata, Oro e Iridio**).
+* 💾 **Autoguardado Local**: Todo tu progreso (estrellas, oro `$g`, mejoras, donaciones del museo y logros) se guarda automáticamente en tu navegador (`localStorage`).
+* 📴 **Cero Dependencias**: 100% código nativo (HTML5, Vanilla JavaScript ES Modules y CSS3 moderno). Sin Node en producción, sin bundlers pesados, carga instantánea.
 
 ---
 
-### 2. 💀 Caverna Calavera (Time Rush Infinito)
-* Empiezas en el piso 1 con solo **30 segundos de antorcha**.
-* Cada roca o palabra picada con éxito suma **+3 segundos de tiempo** y multiplica tu oro acumulado ($g).
-* Tensión rústica: reloj digital, advertencia de luz baja a los 10s y multiplicadores crecientes.
+## ✨ Características Destacadas
 
-### 3. 🤠 El Viaje del Rey de la Pradera (Arcade en la Taberna)
-* El mítico minijuego de la máquina recreativa del Salón Fruta Estelar de Gus.
-* Defiende tu valla de madera contra forajidos y monstruos que descienden en tiempo real.
-* 4 Modificadores de velocidad: *Forastero (1.0x)*, *Sheriff (1.6x)*, *Bandido (2.3x)* y *Fuera de la Ley (3.0x)*.
+| Característica | Detalle |
+| :--- | :--- |
+| **100 Niveles de Campaña** | Divididos en 10 sectores temáticos que abarcan desde la fila guía `ASDF JKLÑ` hasta textos veloces a 120 PPM. |
+| **9 Modos de Juego** | Campaña, Caverna Calavera, Minijuego Prairie King, Batalla contra Morris/Joja, Test 60s, Cuaderno Libre, Pesca de Willy, Centro Cívico Junimo y Museo de Gunther. |
+| **4 Estaciones Dinámicas** | Alterna en cualquier momento entre **Primavera** 🌸, **Verano** ☀️, **Otoño** 🍂 e **Invierno** ❄️ con partículas y paletas acordes. |
+| **Distribución Dual** | Compatible con teclado **Español (ISO con Ñ)** e **Inglés (US ANSI)**. |
+| **Guía para Principiantes** | Modal interactivo de Lore e Historia con pestañas explicativas para que cualquiera entienda el mundo de Stardew Valley. |
+| **Tienda de Pierre** | Gana Oro `$g` mecanografiando y compra mejoras para tu granja y skins estéticas de teclado (*Madera de Cerezo* y *Cristal de Iridio*). |
+| **Mascotas y Compañeros** | Adopta al perrito o gatito de la granja que festejan tus combos y ladran/ronronean al interactuar con ellos. |
+| **30 Logros Desbloqueables** | Desde *Primera Cosecha* hasta *Verdadera Perfección* y *Maestro del Museo*. |
 
-### 4. 🏛️ Duelo de Jefes: Morris & Joja Corporation
-* Morris quiere demoler el Centro Cívico con 1000 PV para instalar un almacén de JojaMart.
-* Escribe conjuros botánicos junto a los Junimos a lo largo de 8 fases críticas para salvar el valle.
+---
 
-### 5. 🐎 Carrera y Festival del Valle (Benchmark de Velocidad)
-* Prueba estándar de 60 segundos con relatos campestres de las cuatro estaciones de Stardew Valley.
+## 🕹️ Los 9 Modos de Juego
+
+### 1. 🌱 Tareas de la Granja (Campaña de 100 Niveles)
+Aprende paso a paso la posición de reposo, teclas guía (`F` y `J`), estiramientos, fila superior, inferior, mayúsculas sostenidas, números y símbolos especiales. Cada nivel evalúa velocidad, precisión y te otorga de 1 a 3 estrellas.
+
+### 2. 💀 La Caverna Calavera (Time-Rush Infinito)
+Desciende a las profundidades de la mina del desierto. Empiezas con solo **30 segundos de antorcha**; cada roca picada con precisión suma **+3 segundos** y multiplica tu oro acumulado. ¿Hasta qué piso puedes llegar antes de que se apague la luz?
+
+### 3. 🤠 El Viaje del Rey de la Pradera (Prairie King Arcade)
+El clásico minijuego arcade de la taberna de Gus. Defiende tu valla contra oleadas de forajidos que bajan en tiempo real. Cuenta con 4 dificultades de velocidad: *Forastero (1.0x)*, *Sheriff (1.6x)*, *Bandido (2.3x)* y *Fuera de la Ley (3.0x)*.
+
+### 4. 🏛️ Batalla de Jefes: Morris & Joja Corporation
+El codicioso gerente Morris quiere demoler el Centro Cívico para construir un almacén de JojaMart. Escribe conjuros Junimo a lo largo de 8 fases de combate para vaciar sus 1000 PV y expulsarlo de Pelican Town.
+
+### 5. 🐎 Festival y Carrera del Valle (Benchmark 60s)
+Prueba estandarizada de un minuto con relatos campestres de las 4 estaciones. Ideal para medir tu WPM neto y compararlo en el tablón de récords.
 
 ### 6. 📖 El Cuaderno del Granjero (Práctica Libre)
-* Escribe cartas, recetas o cualquier texto libremente en un pergamino con marco de madera de roble.
+Pega cualquier texto, artículo o código fuente para practicar mecanografía libremente en un pergamino rústico de madera de roble.
 
-### 7. 🎣 El Muelle de Pesca de Willy (Minijuego de Pesca)
-* Acompaña a Willy en el muelle de madera del océano. Tensa el sedal tecleando palabras marinas para cansar y pescar truchas arcoíris, bagres gigantes y atunes legendarios.
+### 7. 🎣 El Muelle de Pesca de Willy
+Acompaña al pescador Willy en el muelle del océano. Tensa el sedal tecleando palabras marinas para capturar carpas, bagres, truchas arcoíris y peces legendarios.
 
-### 8. 🏛️ El Centro Cívico & Los Lotes de los Junimos (The Community Center)
-* Restaura las 5 salas históricas de Pelican Town junto a los espíritus del bosque (*La Despensa, Sala de Artesanía, El Acuario, Sala de Calderas y La Bóveda*).
-* Escribe los mantras y ofrendas mágicas de cada lote para encender las estrellas de la chimenea y desbloquear Perks permanentes para tu granja:
-  * 🌱 **Invernadero Restaurado**: +25% de Oro ($g) en todas las cosechas.
-  * 🍂 **Puente de la Cantera**: +50% en multiplicador de combo.
-  * 🐟 **Roca Brillante**: Willy duplica tus recompensas de pesca.
-  * ⛏️ **Vagonetas de Vapor**: +5s iniciales de antorcha en la Caverna Calavera.
-  * 💰 **Autobús al Desierto**: Bendición Junimo Estelar con lluvia de oro en rachas altas.
-* Salva el valle por completo expulsando a Joja Corporation y alcanza la Verdadera Perfección.
+### 8. 🌟 El Centro Cívico & Lotes Junimo
+Restaura las 5 salas en ruinas (*La Despensa, Sala de Artesanía, El Acuario, Sala de Calderas y La Bóveda*) escribiendo las ofrendas mágicas de cada lote para desbloquear Perks permanentes:
+* 🌱 **Invernadero**: +25% de Oro en todas las cosechas.
+* 🍂 **Puente de la Cantera**: +50% en multiplicador de combo.
+* 🐟 **Roca Brillante**: Willy duplica tus capturas de pesca.
+* ⛏️ **Vagonetas de Vapor**: +5s de antorcha inicial en Caverna Calavera.
+* 💰 **Autobús al Desierto**: Bendición Junimo Estelar con lluvia de oro.
 
 ### 9. 🏺 El Museo & Biblioteca Arqueológica de Gunther
-* Excava fósiles, rompe geodas misteriosas y dona 20 artefactos antiguos a los pedestales de terciopelo de la biblioteca de Pelican Town.
-* 4 Alas temáticas: **Ala de Fósiles** (Huevo de Dinosaurio, Cráneo Prehistórico), **Ala de Cristales** (Fragmento Prismático, Geoda de Fuego), **Ala de Reliquias** (Pergamino Enano, Máscara Dorada) y **Curiosidades y Mar** (Concha Náutilo, Pollo Dorado).
-* Mecánica de excavación con pasajes históricos, teclado virtual interactivo, sonidos de cincel y geoda, y premios progresivos hasta ganar la mítica **Fruta Estelar (Stardrop)**.
+Excava y dona **20 artefactos y minerales raros** repartidos en 4 alas temáticas:
+* 🦖 **Ala de Fósiles**: *Huevo de Dinosaurio, Cráneo Prehistórico, Fósil de Anfibio, Trilobite, Omóplato*.
+* 💎 **Ala de Cristales**: *Fragmento Prismático, Geoda de Fuego, Fragmentos de Estrella, Huevo de Trueno, Cristal Espectral*.
+* 🏺 **Ala de Reliquias**: *Pergamino de los Enanos, Muñeco Antiguo, Yelmo Enano, Máscara Dorada, Antigua Llave Oxidada*.
+* ⚓ **Curiosidades y Mar**: *Concha Náutilo, Ancla de Galeón, Espada Oxidada, Disco Extraño, Estatua del Pollo Dorado*.
+Incluye minijuego de excavación con cincel, sonidos de geodas rotas y el premio final: la legendaria **Fruta Estelar (Stardrop)**.
 
 ---
 
-## 🎧 Sonidos Táctiles del Valle (Web Audio API)
-En el menú superior puedes alternar entre 6 perfiles sonoros sintetizados en tiempo real:
-1. **🪵 Madera de Roble (Wooden Thock)** ➔ Golpe hueco y cálido de caja de cosecha.
-2. **🔔 Campana de Junimo (Crystal Bell)** ➔ Campanilla cristalina mágica pentatónica.
-3. **⛏️ Pico en la Mina (Mining Strike)** ➔ Impacto de hierro y mineral resonante.
-4. **💧 Regadera & Burbuja (Water Splash)** ➔ Gota de agua fresca y líquida.
-5. **💰 Caja de Pierre (Gold Coin)** ➔ Tintineo metálico de monedas de oro $g.
-6. **📜 Máquina de Elliott (Typewriter)** ➔ Golpe mecánico clásico en la cabaña del muelle.
+## 🗺️ El Plan de Estudio: 10 Sectores (100 Niveles)
+
+```
+[SECTOR 01] La Parcela del Abuelo  ──► Fila Guía (ASDF JKLÑ) & Homing (F, J)
+[SECTOR 02] Huerto & Tienda Pierre ──► Fila Superior (QWERTYUIOP) & Hortalizas
+[SECTOR 03] Minas de la Montaña    ──► Fila Inferior (ZXCVBNM,.-) & Minerales
+[SECTOR 04] La Playa de Willy      ──► Shift Cruzado & Mayúsculas Sostenidas
+[SECTOR 05] Rancho de Marnie       ──► Acentos (á, é, í, ó, ú) & Signos Dobles (¡! ¿?)
+[SECTOR 06] El Centro Cívico       ──► Fila Numérica (1 al 0) & Monedero ($g)
+[SECTOR 07] Bosque & Torre Mago    ──► Símbolos Especiales (# $ % & * + = ~ ^ | \)
+[SECTOR 08] Festivales del Valle   ──► Puntuación Compleja & Textos Fluídos
+[SECTOR 09] Caverna Calavera       ──► Desafío Contrarreloj a 70+ PPM
+[SECTOR 10] Cumbre de Perfección   ──► Maestría de 90 a 120 PPM (Desafío Sr. Qi)
+```
 
 ---
 
-## 🛒 Tienda General de Pierre & Mejoras de la Huerta
-Gana Oro ($g) en tus cosechas y visítalo en la barra superior para adquirir 10 mejoras activas y cosméticos:
-1. **💧 Regadera de Cobre** (+15% de Oro en cosechas)
-2. **⛏️ Pico de Acero** (+3s de antorcha en Caverna Calavera)
-3. **🌾 Guadaña de Oro** (+50% bonus de puntos de combo)
-4. **🎣 Caña de Iridio** (Perdona 1 fallo por nivel sin quebrar la racha)
-5. **🐶 Perrito de Granja** (Compañero leal que celebra tus combos y ladra al acariciarlo)
-6. **🐱 Gatito de Granja** (Tierno felino que ronronea junto al teclado)
-7. **🛖 Choza de los Junimos** (Lluvia de estrellas y confeti mágico en combos de 25+)
-8. **🌸 Teclado Madera de Cerezo** (Estilo floral de madera rosada)
-9. **💜 Teclado Cristal de Iridio** (Estilo cósmico de cristal púrpura con aura brillante)
-10. **⏰ El Reloj Dorado** (Joya suprema de la granja y prestigio eterno)
+## 🎧 Motor de Audio Sintetizado (Web Audio API)
+
+No requiere descargar archivos de audio MP3 externos. Todos los sonidos son generados proceduralmente con osciladores y filtros en tiempo real:
+
+1. **🪵 Madera de Roble (Wooden Thock)**: Golpe sordo de caja de embalaje de madera.
+2. **🔔 Campana Junimo (Crystal Bell)**: Resonancia de campana mágica de cristal.
+3. **⛏️ Pico en la Mina (Mining Strike)**: Impacto de acero contra roca y minerales.
+4. **💧 Regadera & Burbuja (Water Splash)**: Gota líquida refrescante para regar la huerta.
+5. **💰 Caja de Pierre (Gold Coin)**: Tintineo de monedas de oro `$g`.
+6. **📜 Máquina de Escribir (Typewriter Tick)**: Teclas mecánicas clásicas de la cabaña de Elliott.
 
 ---
 
-## 📜 Tablón de Anuncios & Diálogos del Valle
-* **Tablón de Anuncios de Pelican Town**: Tareas diarias con barras de progreso en vivo para ganar Oro ($g) extra.
-* **Diálogos de Aldeanos con Retratos**: Conversa con el Fantasma del Abuelo, Pierre, Clint, Willy, Marnie, los Junimos, Rasmodius, el Alcalde Lewis, el Sr. Qi y la Estatua de la Perfección antes de cada sector.
-* **🐔 Gallinita Interactiva y Mascotas**: Haz clic en la gallinita en la esquina inferior derecha para escuchar su cacareo y recibir consejos de mecanografía.
-* **🌸☀️🍂❄️ Ciclo de Cuatro Estaciones**: Cambia la estación en la barra superior para alternar pétalos de cerezo, luciérnagas de verano, hojas de arce otoñales o copos de nieve invernales.
+## 🛒 Tienda General de Pierre: Mejoras y Cosméticos
+
+| Icono | Mejora | Efecto en Juego |
+| :---: | :--- | :--- |
+| 💧 | **Regadera de Cobre** | +15% de Oro en todas las cosechas completadas. |
+| ⛏️ | **Pico de Acero** | +3 segundos extra de antorcha en la Caverna Calavera. |
+| 🌾 | **Guadaña de Oro** | +50% de bonificación en acumulación de combo. |
+| 🎣 | **Caña de Iridio** | Perdona 1 error por nivel sin quebrar la racha de combo. |
+| 🐶 | **Perrito de Granja** | Mascota animada que celebra tus cosechas y ladra al acariciarlo. |
+| 🐱 | **Gatito de Granja** | Mascota animada que ronronea junto al teclado. |
+| 🛖 | **Choza Junimo** | Lluvia de confeti y estrellas mágicas en rachas de 25+ aciertos. |
+| 🌸 | **Teclado Madera de Cerezo** | Skin visual de madera rosada con estética de primavera. |
+| 💜 | **Teclado Cristal de Iridio** | Skin visual con brillo violeta estelar y aura cósmica. |
+| ⏰ | **Reloj Dorado** | Prestigio máximo de la granja y multiplicador de perfección. |
+
+---
+
+## 💻 Tecnologías Utilizadas
+
+* **HTML5**: Estructura semántica accesible con modales nativos, paneles dinámicos y tags aria.
+* **CSS3**: Paleta estacional con variables CSS, animaciones micro-interactivas, sombras cálidas y bordes biselados estilo caja de madera.
+* **JavaScript ES6+**: Arquitectura modular orientada a objetos (ES Modules), máquina de estados reactiva, sistema de partículas en `<canvas>` y almacenamiento local (`localStorage`).
+* **Web Audio API**: Generación de ondas sonoras sinusoidales, triangulares y ruido blanco en vivo mediante osciladores, envolventes ADSR y filtros biquad.
 
 ---
 
 ## 🚀 Cómo Jugar en Tu Navegador
 
-El servidor local ya está ejecutándose en segundo plano. Abre:
+### Opción 1: Jugar Online en GitHub Pages
+Simplemente abre el enlace oficial en cualquier navegador de PC:  
+👉 **[https://octavioramirez10.github.io/STARDEW-VALLEY-TYPING-EDITION/](https://octavioramirez10.github.io/STARDEW-VALLEY-TYPING-EDITION/)**
+
+### Opción 2: Ejecutar Localmente
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/OctavioRamirez10/STARDEW-VALLEY-TYPING-EDITION.git
+   cd STARDEW-VALLEY-TYPING-EDITION
+   ```
+
+2. Ejecuta un servidor local ligero (cualquiera de estas opciones sirve):
+   * Con Node.js:
+     ```bash
+     node scripts/server.js
+     ```
+   * Con Python 3:
+     ```bash
+     python -m http.server 8080
+     ```
+   * Con la extensión **Live Server** de VS Code sobre `index.html`.
+
+3. Abre tu navegador en `http://localhost:8080/`.
+
+---
+
+## 🧪 Pruebas Automatizadas
+
+El proyecto incluye suites de pruebas unitarias y de integración para validar la integridad de los datos, elementos del DOM, audio y compatibilidad:
+
+```bash
+# Verificar todas las mecánicas y 9 modos de juego
+node scripts/test_all_games.js
+
+# Verificar Centro Cívico y Lotes Junimo
+node scripts/verify_bundles.js
+
+# Verificar el Museo de Gunther y 20 Artefactos
+node scripts/verify_museum.js
 ```
-http://localhost:8080/
-```
 
+---
 
+## 📜 Licencia y Atribución
 
-#   S T A R D E W - V A L L E Y - T Y P I N G - E D I T I O N  
- 
+* **Código**: Distribuido bajo la [Licencia MIT](./LICENSE). Siéntete libre de aprender, bifurcar y contribuir.
+* **Temática e Inspiración**: Homenaje y tributo educativo basado en el universo de *Stardew Valley*, creado originalmente por **ConcernedApe** (Eric Barone). Todos los derechos de la franquicia pertenecen a su creador original.
+
+---
+
+<div align="center">
+  Hecho con ❤️ y dedicación granjera por <strong>Octavio Ramirez</strong>.<br/>
+  <em>¡Que los Junimos bendigan tu cosecha y tus dedos en el teclado! 🍏✨</em>
+</div>
