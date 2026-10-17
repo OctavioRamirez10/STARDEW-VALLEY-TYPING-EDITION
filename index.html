@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="stardew">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STARDEW VALLEY // TYPING EDITION - Escuela de Mecanografía del Valle</title>
+  <meta name="description" content="Aprende mecanografía táctil al ritmo del campo en Stardew Valley. Cuida la huerta del abuelo, desciende a la Caverna Calavera y salva el Centro Cívico con 100 niveles.">
+  
+  <!-- Google Fonts: VT323 (Retro Pixel), Rajdhani, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700;800&family=Rajdhani:wght@600;700;800&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/keyboard.css">
+</head>
+<body>
+
+  <!-- Floating Canvas Particles (Fireflies, Pollen & Autumn Leaves) -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-container">
+    
+    <!-- TOP NAVIGATION BAR: STARDEW VALLEY WOODEN BANNER -->
+    <header class="navbar">
+      <div class="brand-wrapper" id="nav-brand-home" title="Volver a la Granja">
+        <span class="brand-mascot">🐔</span>
+        <div class="brand-text-block">
+          <span class="brand-title">STARDEW <small class="brand-yellow">VALLEY</small></span>
+          <span class="brand-tag">🌾 TYPING EDITION</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Farm Season & Weather HUD Telemetry (Interactive Season Cycle) -->
+        <div class="farm-season-pill" id="btn-toggle-season" style="cursor: pointer;" title="Cambiar Estación del Valle (Primavera, Verano, Otoño, Invierno)">
+          <span class="weather-icon" id="season-weather-icon">🍂</span>
+          <span class="season-title" id="season-title-text">OTOÑO • AÑO 1</span>
+        </div>
+
+        <!-- Hidden Theme Select for app.js compatibility -->
+        <select id="theme-select" style="display: none;">
+          <option value="stardew" selected>Stardew Valley</option>
+        </select>
+
+        <!-- Learning Language Switcher -->
+        <select id="lang-select" class="select-stardew select-stardew-lang" title="Idioma de los Pedidos">
+          <option value="es">🇪🇸 Español</option>
+          <option value="en">🇬🇧 English</option>
+          <option value="pt">🇧🇷 Português</option>
+          <option value="fr">🇫🇷 Français</option>
+        </select>
+
+        <!-- Keyboard Layout Switcher -->
+        <select id="layout-select" class="select-stardew select-stardew-layout" title="Distribución de Teclado">
+          <option value="es">⌨️ Teclado ES (ISO / Ñ)</option>
+          <option value="en">⌨️ Keyboard US (ANSI / EN)</option>
+        </select>
+
+        <!-- Game Difficulty Modifier Selector (Stardew Valley Farm Journey) -->
+        <select id="difficulty-select" class="select-stardew select-stardew-diff diff-normal" title="Modificador de Jornada y Dificultad de la Granja">
+          <option value="normal">🌱 Jornada Serena de Granja (Normal • 90% min)</option>
+          <option value="hardcore">⏱️ Carrera al Ocaso de las 2:00 AM (Contrarreloj • 95% + Tiempo)</option>
+          <option value="suddendeath">🥚 Cuidar el Huevo de Calidad Iridio (Muerte Súbita • 100% Sin Fallos)</option>
+          <option value="blind">🕶️ Mina a Oscuras sin Antorcha (Modo Ciego • Tacto Puro)</option>
+          <option value="glitch">🌫️ Niebla del Pantano de la Bruja (Niebla Mística • 96% min)</option>
+          <option value="godmode">🕯️ Las 4 Velas del Santuario del Abuelo (Perfección • 98% & 80+ PPM)</option>
+        </select>
+
+        <!-- Sound Profile Synthesizer (Stardew Valley Soundscape) -->
+        <select id="switch-sound-select" class="select-stardew select-stardew-sound" title="Sonidos Táctiles del Valle">
+          <option value="thock">🪵 Sonido: Madera de Roble (Wooden Thock)</option>
+          <option value="junimo">🔔 Sonido: Campana de Junimo (Crystal Bell)</option>
+          <option value="pickaxe">⛏️ Sonido: Pico en la Mina (Mining Strike)</option>
+          <option value="water">💧 Sonido: Regadera & Burbuja (Water Splash)</option>
+          <option value="coin">💰 Sonido: Caja de Pierre (Gold Coin)</option>
+          <option value="typewriter">📜 Sonido: Máquina de Elliott (Typewriter)</option>
+        </select>
+
+        <!-- SFX Toggle -->
+        <button id="toggle-sfx-btn" class="stardew-control-pill active" title="Activar/Desactivar Efectos de Audio">
+          <span id="sfx-icon">🔊</span> <span id="sfx-text">Sonidos</span>
+        </button>
+
+        <!-- Pastoral Music Drone Toggle -->
+        <button id="toggle-music-btn" class="stardew-control-pill" title="Activar/Desactivar Melodía Acústica">
+          <span id="music-icon">🎵</span> <span id="music-text">Pastoral</span>
+        </button>
+
+        <!-- Pierre General Store Button -->
+        <button id="btn-open-store" class="stardew-control-pill" title="Visitar la Tienda de Semillas y Mejoras de Pierre">
+          <span>🛒</span> <span>Tienda</span>
+        </button>
+
+        <!-- Pelican Town Daily Quests Button -->
+        <button id="btn-open-quests" class="stardew-control-pill" title="Tablón de Anuncios y Pedidos Diarios">
+          <span>📜</span> <span>Pedidos</span>
+        </button>
+
+        <!-- Achievements Button -->
+        <button id="btn-open-achievements" class="stardew-control-pill" title="Ver Trofeos y Logros de la Granja">
+          <span>🏆</span> <span>Logros</span> (<span id="achievements-nav-count">0/30</span>)
+        </button>
+
+        <!-- Junimo Community Center Bundles Button -->
+        <button id="btn-open-bundles" class="stardew-control-pill" title="Visitar el Centro Cívico y los Lotes de los Junimos">
+          <span>🏛️</span> <span>Centro Cívico</span> (<span id="bundles-nav-count">0/5</span>)
+        </button>
+
+        <!-- Gunther's Museum & Library Button -->
+        <button id="btn-open-museum" class="stardew-control-pill" title="Visitar el Museo y Biblioteca Arqueológica de Gunther">
+          <span>🏺</span> <span>Museo</span> (<span id="museum-nav-count">0/20</span>)
+        </button>
+
+        <!-- New Farmer Lore & Tutorial Guide Button -->
+        <button id="btn-open-guide" class="stardew-control-pill" title="Guía de Historia, Personajes y Cómo Jugar para todo público">
+          <span>📖</span> <span>¿Cómo Jugar / Historia?</span>
+        </button>
+
+        <!-- Farmer Level & Gold $g Badge -->
+        <div class="farmer-level-badge" id="btn-open-profile" style="cursor: pointer;" title="Ver Perfil del Granjero y Monedero">
+          <span>GRANJERO <span id="player-level-val">1</span></span>
+          <span style="opacity: 0.5;">•</span>
+          <span style="color: var(--stardew-gold); font-weight: 800;"><span id="player-xp-val">0</span> $g</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- VIEW 1: MAIN MENU (SELECCIÓN DE MODOS DE JUEGO) -->
+    <main id="view-menu" class="view-panel active">
+      <section class="stardew-hero-banner">
+        <div class="stardew-banner-sign">
+          <div class="stardew-badge-label">🌾 BIENVENIDO A PELICAN TOWN // VALLE DE STARDEW 🌾</div>
+          <h1 class="hero-title" id="ui-hero-title">STARDEW VALLEY // TYPING EDITION</h1>
+          <p class="hero-subtitle" id="ui-hero-subtitle">
+            Domina cada dedo sin mirar el teclado físico. Cuida la huerta del abuelo, ayuda a los aldeanos de Pelican Town, desciende a la Caverna Calavera y expulsa a JojaMart con 100 niveles progresivos.
+          </p>
+
+          <!-- New Farmer & Non-Gamer Welcome Prompt Banner -->
+          <div class="hero-guide-prompt" id="btn-hero-guide" style="cursor: pointer;" title="Abrir la Guía del Valle para Nuevos Jugadores">
+            <div class="guide-sparkle">✨</div>
+            <div class="guide-text-block">
+              <strong>¿Primera vez en Stardew Valley o en mecanografía?</strong>
+              <span>Haz clic aquí para descubrir la historia, quién es quién y cómo colocar los dedos sin mirar el teclado.</span>
+            </div>
+            <div class="guide-cta-badge">VER GUÍA DEL VALLE ➔</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Game Modes Grid -->
+      <section class="modes-grid">
+        <!-- Mode 1: Farm Tasks (100 Levels) -->
+        <div class="mode-card sd-card-green" id="btn-start-campaign" style="--card-accent: #73b32a;">
+          <div class="mode-corner-decor">01 // LA HUERTA</div>
+          <div>
+            <div class="mode-icon">🌱</div>
+            <h2 class="mode-name" id="mode-name-campaign">TAREAS DE LA GRANJA (100 NIVELES)</h2>
+            <p class="mode-desc" id="mode-desc-campaign">
+              Aprende la posición anatómica de cada dedo paso a paso desde cero. 10 sectores desde la parcela del abuelo hasta la cumbre de la perfección con 5 estrellas por nivel.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #73b32a;">TRABAJAR LA HUERTA</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 2: Skull Cavern Time Rush -->
+        <div class="mode-card sd-card-red" id="btn-start-survival" style="--card-accent: #e53935;">
+          <div class="mode-corner-decor">02 // LA MINA</div>
+          <div>
+            <div class="mode-icon">💀</div>
+            <h2 class="mode-name" id="mode-name-survival" style="color: #e53935;">CAVERNA CALAVERA (TIME RUSH)</h2>
+            <p class="mode-desc" id="mode-desc-survival">
+              Contrarreloj infinito de reflejos: Empiezas con 30s de antorcha. Cada palabra picada suma +3s y multiplica tus gemas y oro $g. ¡Rompe rocas sin detenerte!
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #e53935;">BAJAR A LA CAVERNA</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 3: Prairie King Arcade -->
+        <div class="mode-card sd-card-orange" id="btn-start-arcade" style="--card-accent: #fb8c00;">
+          <div class="mode-corner-decor">03 // LA TABERNA</div>
+          <div>
+            <div class="mode-icon">🤠</div>
+            <h2 class="mode-name" id="mode-name-arcade">EL VIAJE DEL REY DE LA PRADERA</h2>
+            <p class="mode-desc" id="mode-desc-arcade">
+              El mítico minijuego arcade del Salón Fruta Estelar de Gus: dispara a las oleadas de forajidos y monstruos antes de que alcancen tu valla de madera.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #fb8c00;">JUGAR AL ARCADE</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 4: Boss Battle: Morris & Joja Corp -->
+        <div class="mode-card sd-card-purple" id="btn-start-boss" style="--card-accent: #ab47bc;">
+          <div class="mode-corner-decor">04 // CENTRO CÍVICO</div>
+          <div>
+            <div class="mode-icon">🏛️</div>
+            <h2 class="mode-name" id="mode-name-boss">JEFE: MORRIS & JOJA CORP</h2>
+            <p class="mode-desc" id="mode-desc-boss">
+              Morris quiere demoler el Centro Cívico con 1000 HP. Escribe conjuros botánicos junto a los Junimos para expulsar a JojaMart para siempre del valle.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #ab47bc;">SALVAR EL VALLE</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 5: Speed Benchmark -->
+        <div class="mode-card sd-card-blue" id="btn-start-speedtest" style="--card-accent: #29b6f6;">
+          <div class="mode-corner-decor">05 // EL FESTIVAL</div>
+          <div>
+            <div class="mode-icon">🐎</div>
+            <h2 class="mode-name" id="mode-name-speedtest">CARRERA Y FESTIVAL DEL VALLE</h2>
+            <p class="mode-desc" id="mode-desc-speedtest">
+              Pon a prueba tu velocidad pura y precisión campestre en una carrera de 60 segundos con relatos de las cuatro estaciones de Stardew Valley.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #29b6f6;">INICIAR CARRERA</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 6: Farmer Journal (Custom Practice) -->
+        <div class="mode-card sd-card-yellow" id="btn-start-custom" style="--card-accent: #fbc02d;">
+          <div class="mode-corner-decor">06 // LA CABAÑA</div>
+          <div>
+            <div class="mode-icon">📖</div>
+            <h2 class="mode-name" id="mode-name-custom">EL CUADERNO DEL GRANJERO</h2>
+            <p class="mode-desc" id="mode-desc-custom">
+              Escribe o pega cualquier carta, receta de cocina o texto propio para practicar libremente a tu propio ritmo junto a la chimenea.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #fbc02d;">ABRIR CUADERNO</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 7: Willy's Fishing Pier (Minijuego de Pesca) -->
+        <div class="mode-card sd-card-blue" id="btn-start-fishing" style="--card-accent: #0288d1;">
+          <div class="mode-corner-decor">07 // LA PLAYA</div>
+          <div>
+            <div class="mode-icon">🎣</div>
+            <h2 class="mode-name" id="mode-name-fishing">EL MUELLE DE PESCA DE WILLY</h2>
+            <p class="mode-desc" id="mode-desc-fishing">
+              ¡Acompaña a Willy en el muelle del océano! Cada palabra correcta tensa el carrete y acerca el pez al muelle con salpicaduras y animaciones. ¡Pesca ejemplares legendarios!
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #0288d1;">LANZAR LA CAÑA</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 8: Junimo Community Center Bundles -->
+        <div class="mode-card" id="btn-start-bundles" style="--card-accent: #d97706;">
+          <div class="mode-corner-decor">08 // CENTRO CÍVICO</div>
+          <div>
+            <div class="mode-icon">🏛️</div>
+            <h2 class="mode-name" id="mode-name-bundles">EL CENTRO CÍVICO & LOTES JUNIMO</h2>
+            <p class="mode-desc" id="mode-desc-bundles">
+              Restaura las 5 salas del Centro Cívico con los espíritus del bosque. Escribe las ofrendas mágicas de cada lote para reparar el invernadero, las vagonetas y el autobús al desierto.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #d97706;">RESTAURAR SALAS</span> <span>➔</span>
+          </div>
+        </div>
+
+        <!-- Mode 9: Gunther's Museum & Library -->
+        <div class="mode-card" id="btn-start-museum" style="--card-accent: #c2410c;">
+          <div class="mode-corner-decor">09 // EL MUSEO</div>
+          <div>
+            <div class="mode-icon">🏺</div>
+            <h2 class="mode-name" id="mode-name-museum">EL MUSEO & BIBLIOTECA DE GUNTHER</h2>
+            <p class="mode-desc" id="mode-desc-museum">
+              Excava fósiles prehistóricos, rompe geodas misteriosas y dona 20 minerales raros a los pedestales de Gunther para completar la gran colección del valle y ganar la Fruta Estelar.
+            </p>
+          </div>
+          <div class="mode-cta">
+            <span style="color: #c2410c;">EXCAVAR Y DONAR</span> <span>➔</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- VIEW 2: CAMPAIGN LEVEL SELECTOR (100 NIVELES EN 10 SECTORES) -->
+    <main id="view-campaign-select" class="view-panel">
+      <div class="campaign-header">
+        <button class="back-btn" id="btn-back-from-levels">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="campaign-title-block">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: var(--stardew-gold);">
+            TAREAS DEL VALLE: 100 NIVELES
+          </h2>
+          <span style="font-size: 0.95rem; color: #fff;">
+            Progresa desde la limpieza de parcelas hasta la maestría de 120 PPM en la cumbre.
+          </span>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <!-- Free Play Mode Toggle -->
+          <button id="btn-toggle-freeplay" class="freeplay-badge-btn" title="Alternar entre modo progresivo con candados o desbloqueo total libre">
+            <span id="freeplay-icon">🔒</span> <span id="freeplay-text">Modo Progresivo</span>
+          </button>
+
+          <!-- Total Stars Badge -->
+          <div class="stars-summary-badge" title="Estrellas de Calidad Acumuladas">
+            <span>⭐</span> <span id="total-stars-val">0</span> / <span id="total-stars-max">500</span>
+          </div>
+
+          <!-- Villager Dialogue Cutscene Button -->
+          <button id="btn-sector-story" class="freeplay-badge-btn" title="Conversar con el habitante de este sector">
+            <span>📖</span> <span>Diálogo del Aldeano</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Status Filter Bar -->
+      <div class="campaign-filters-row">
+        <input 
+          type="text" 
+          id="level-search-input" 
+          class="level-search-input" 
+          placeholder="🔍 Buscar nivel por nombre, hortaliza o tecla (ej: pastinaca, fresa, F, J)..."
+        />
+
+        <div class="filter-pills-group" id="status-filters-container">
+          <button class="filter-pill active" data-status-filter="all">Todas las Tareas</button>
+          <button class="filter-pill" data-status-filter="pending">Por Hacer</button>
+          <button class="filter-pill" data-status-filter="completed">Completadas</button>
+          <button class="filter-pill" data-status-filter="mastered">Calidad Iridio (5★)</button>
+        </div>
+      </div>
+
+      <!-- Sector Tabs Scrollable Bar -->
+      <div class="sector-tabs-bar" id="sector-tabs-container">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+
+      <!-- Level Cards Grid (100 Levels) -->
+      <div class="levels-grid" id="levels-container">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </main>
+
+    <!-- VIEW 3: TYPING ARENA (PRACTICE INTERFACE) -->
+    <main id="view-arena" class="view-panel">
+      <!-- Arena Top Bar -->
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-arena">
+          <span>⬅</span> <span>Lista de Tareas</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span id="hud-diff-pill" class="sector-tag">NORMAL</span>
+          <h2 id="arena-level-title" class="level-title">NIVEL 1: SEMILLAS DE CHIRIVÍA</h2>
+        </div>
+
+        <!-- Ghost Typist (Pace Car) Telemetry Box -->
+        <div id="hud-ghost-box" class="ghost-hud-box" title="Haz clic para activar/desactivar el ritmo del Junimo Fantasma">
+          <span id="hud-ghost-badge" class="ghost-hud-badge ahead">👻 JUNIMO AL PASO</span>
+        </div>
+
+        <button class="restart-pill-btn" id="btn-restart-level" title="Reiniciar tarea actual (o pulsa Tab + Enter)">
+          <span>🔄</span> <span>Reiniciar</span>
+        </button>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🌱 <strong>Contexto Stardew:</strong> Estás en la parcela que te heredó tu abuelo. Cada letra acertada con el dedo correcto riega un brote o remueve una piedra; el ritmo armónico hará crecer cosechas de oro.</span>
+      </div>
+
+      <!-- Weak Keys Recalibration Bar (Appears when user has errors) -->
+      <div id="weak-keys-container" class="weak-keys-bar" style="display: none;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: #3e1d08; display: flex; align-items: center; gap: 6px;">
+          <span>⛏️</span> <span>HERRAMIENTAS DESAFILADAS:</span>
+        </span>
+        <div id="weak-keys-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+        <button id="btn-launch-weak-drill" class="stardew-btn stardew-btn-secondary" style="font-size: 0.75rem; padding: 5px 12px; margin-left: auto;">
+          <span>🌾</span> <span>Afilar en la Huerta (Práctica Rápida)</span>
+        </button>
+      </div>
+
+      <!-- Character Action Meadow Track & Character Selector -->
+      <div class="character-action-track" id="character-action-track">
+        <!-- Character Companion Selector -->
+        <div class="character-picker-row">
+          <span class="picker-label">COMPAÑERO:</span>
+          <div class="picker-buttons-group" id="character-picker-group">
+            <button class="char-pick-btn active" data-char="farmer" data-icon="👨‍🌾" title="Granjero con Azada">👨‍🌾 Granjero</button>
+            <button class="char-pick-btn" data-char="farmer_f" data-icon="👩‍🌾" title="Granjera Campesina">👩‍🌾 Granjera</button>
+            <button class="char-pick-btn" data-char="junimo" data-icon="🍏" title="Junimo Danzarín">🍏 Junimo</button>
+            <button class="char-pick-btn" data-char="horse" data-icon="🐎" title="Caballito Veloz">🐎 Caballo</button>
+            <button class="char-pick-btn" data-char="shane" data-icon="🐔" title="Shane y Gallina">🐔 Shane</button>
+            <button class="char-pick-btn" data-char="willy" data-icon="🎣" title="Willy el Pescador">🎣 Willy</button>
+            <button class="char-pick-btn" data-char="wizard" data-icon="🧙‍♂️" title="El Mago Rasmodius">🧙‍♂️ Mago</button>
+          </div>
+        </div>
+
+        <!-- The Scenic Walking Garden Path -->
+        <div class="meadow-path-container">
+          <!-- Left Landmark: Farmhouse -->
+          <div class="meadow-landmark landmark-home" title="Cabaña de la Granja">🏡</div>
+
+          <!-- Soil & Crop Plots along the path that evolve as you type -->
+          <div class="meadow-crops-row">
+            <div class="crop-plot" id="plot-1"><span class="crop-icon">🌱</span><small>Fase 1</small></div>
+            <div class="crop-plot" id="plot-2"><span class="crop-icon">🌿</span><small>Fase 2</small></div>
+            <div class="crop-plot" id="plot-3"><span class="crop-icon">🍓</span><small>Fase 3</small></div>
+            <div class="crop-plot" id="plot-4"><span class="crop-icon">🌟</span><small>Cosecha</small></div>
+          </div>
+
+          <!-- Active Walking Character Sprite with live Left: X% and bounce -->
+          <div class="runner-character-wrapper" id="runner-character-wrapper" style="left: 0%;">
+            <div class="character-emote" id="character-emote-bubble">✨</div>
+            <div class="character-avatar" id="runner-character-avatar">👨‍🌾</div>
+          </div>
+
+          <!-- Ghost Typist (Pace Car Junimo) Indicator -->
+          <div id="ghost-car-indicator" class="ghost-marker" style="left: 0%;" title="Ritmo ideal para superar la meta">👻</div>
+          <div id="player-car-indicator" style="display: none;"></div>
+
+          <!-- Right Landmark: Shipping Bin -->
+          <div class="meadow-landmark landmark-bin" id="meadow-shipping-bin" title="Cajón de Envíos de Lewis">📦</div>
+        </div>
+      </div>
+
+      <!-- Live Stats Ticker -->
+      <div class="live-stats-bar">
+        <div class="stat-pill">
+          <span class="stat-label">Velocidad</span>
+          <span class="stat-value" id="hud-wpm-val">0 <small style="font-size: 0.85rem;">WPM</small></span>
+          <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-top: 4px;">
+            <div id="hud-wpm-meter" style="width: 0%; height: 100%; background: var(--stardew-gold); border-radius: 2px;"></div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Precisión</span>
+          <span class="stat-value" id="hud-acc-val">100%</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Combo</span>
+          <span class="stat-value" style="color: var(--stardew-gold);" id="hud-combo-val">x0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Errores</span>
+          <span class="stat-value" style="color: #e53935;" id="hud-errors-val">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label" id="hud-timer-label">Progreso</span>
+          <span class="stat-value" style="color: var(--stardew-sky);" id="hud-progress-val">0%</span>
+          <div style="width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px; margin-top: 4px;">
+            <div id="arena-progress-fill" style="width: 0%; height: 100%; background: var(--stardew-sprout); border-radius: 2px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stream Box (Parchment Display) -->
+      <div class="stream-container" id="stream-container">
+        <div class="stream-text" id="text-stream-display">
+          <!-- Characters dynamically injected via app.js -->
+        </div>
+      </div>
+
+      <!-- Central Finger Guidance Hint -->
+      <div class="finger-hint-banner">
+        <span class="finger-badge" id="active-finger-badge">Espacio — Pulgares</span>
+        <div id="terminal-finger-hint" style="display: none;"></div>
+      </div>
+
+      <!-- Interactive Wooden Virtual Keyboard -->
+      <div class="keyboard-container" id="keyboard-container">
+        <!-- Rendered dynamically based on Layout ES / EN -->
+      </div>
+    </main>
+
+    <!-- VIEW 4: SKULL CAVERN (TIME RUSH / SURVIVAL) -->
+    <main id="view-survival" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-survival">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #e53935; color: #e53935;">CAVERNA CALAVERA</span>
+          <h2 class="level-title">Descenso en la Mina del Desierto</h2>
+        </div>
+        <button class="restart-pill-btn" id="btn-restart-survival">
+          <span>🔄</span> <span>Reiniciar Descenso</span>
+        </button>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>💀 <strong>Contexto Stardew:</strong> La Caverna Calavera es la mina profunda del desierto. Bajas con una antorcha que se agota; cada mineral que picas escribiendo a tiempo te suma +3s de luz y monedas de oro.</span>
+      </div>
+
+      <div class="survival-container">
+        <div class="survival-dashboard">
+          <div>
+            <span style="font-size: 0.8rem; font-family: var(--font-display); color: #7a401b; letter-spacing: 1px;">
+              TIEMPO DE ANTORCHA
+            </span>
+            <div class="survival-clock-digital" id="survival-timer-val">30.0s</div>
+          </div>
+
+          <div style="text-align: center;">
+            <span style="font-size: 0.8rem; font-family: var(--font-display); color: #3e1d08;">ROCAS PICADAS</span>
+            <div style="font-size: 2.2rem; font-weight: 900; color: #3e1d08;" id="survival-words-val">0</div>
+          </div>
+
+          <div>
+            <span style="font-size: 0.8rem; font-family: var(--font-display); color: #7a401b;">BONUS DE ORO</span>
+            <div class="survival-multiplier-badge" id="survival-mult-val">1.0x $g</div>
+            <div id="survival-record-val" style="display: none;">0</div>
+          </div>
+        </div>
+
+        <div class="survival-stream-box" id="survival-stream-box">
+          <div style="font-size: 0.85rem; font-family: var(--font-display); color: #e53935; margin-bottom: 8px;">
+            ¡PICA EL MINERAL ANTES DE QUE SE APAGUE LA LUZ! (+3s POR ACIERTO)
+          </div>
+          <div class="survival-current-word" id="survival-word-display">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+
+        <div class="keyboard-container" id="survival-keyboard-container"></div>
+      </div>
+    </main>
+
+    <!-- VIEW 5: JOURNEY OF THE PRAIRIE KING (ARCADE DEFENSE) -->
+    <main id="view-arcade" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-arcade">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #fb8c00; color: #fb8c00;">TABERNA DE GUS</span>
+          <h2 class="level-title">El Viaje del Rey de la Pradera</h2>
+        </div>
+
+        <div class="arcade-hud-row">
+          <!-- Arcade Difficulty Modifier -->
+          <select id="arcade-diff-select" class="select-stardew select-stardew-arcade" title="Velocidad de los enemigos">
+            <option value="recruit">🤠 Modo Forastero (x1.0 Vel)</option>
+            <option value="veteran">🌵 Modo Sheriff (x1.6 Vel)</option>
+            <option value="nightmare">🔥 Modo Bandido (x2.3 Vel)</option>
+            <option value="apocalypse">💀 Modo Fuera de la Ley (x3.0 Vel)</option>
+          </select>
+
+          <div class="arcade-shield-bar-wrapper">
+            <span style="font-size: 0.75rem; color: #3e1d08; font-weight: 800;">VALLA:</span>
+            <div class="arcade-shield-bar">
+              <div id="arcade-shield-fill" class="arcade-shield-fill"></div>
+            </div>
+            <span id="arcade-shield-val" style="font-size: 0.85rem; font-weight: 800; color: var(--stardew-sprout);">100%</span>
+          </div>
+
+          <div class="arcade-score-badge">
+            <span>PUNTOS:</span> <strong id="arcade-score-val" style="color: var(--stardew-gold);">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🤠 <strong>Contexto Stardew:</strong> En la taberna del pueblo hay una máquina recreativa arcade de vaqueros. Defiende tu valla de madera escribiendo las palabras de los forajidos antes de que la alcancen.</span>
+      </div>
+
+      <!-- Arcade Falling Words Viewport -->
+      <div class="arcade-viewport" id="arcade-viewport">
+        <div class="arcade-city-base"></div>
+      </div>
+
+      <!-- Dedicated Virtual Keyboard for Arcade -->
+      <div class="keyboard-container" id="arcade-keyboard-container"></div>
+    </main>
+
+    <!-- VIEW 6: BOSS BATTLE (MORRIS & JOJA CORP) -->
+    <main id="view-boss" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-boss">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #ab47bc; color: #ab47bc;">CENTRO CÍVICO</span>
+          <h2 class="level-title">Duelo: Morris // Joja Corporation</h2>
+        </div>
+
+        <div class="boss-timer-badge">
+          <span>TIEMPO:</span> <strong id="boss-counter-timer" style="color: #e53935; font-size: 1.3rem;">15s</strong>
+        </div>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🏛️ <strong>Contexto Stardew:</strong> Morris representa a la fría corporación JojaMart, que busca demoler el Centro Cívico. Tus palabras son conjuros mágicos botánicos con los Junimos para salvar el pueblo.</span>
+      </div>
+
+      <div class="boss-arena-card">
+        <div class="boss-top-hud">
+          <div class="morris-portrait" title="Morris, Gerente de JojaMart">💼</div>
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-family: var(--font-display); font-weight: 900; font-size: 1.2rem; color: #e53935;">
+                MORRIS (GERENTE DE JOJAMART)
+              </span>
+              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--stardew-gold);">
+                FASE <span id="boss-phase-num">1</span> / 8
+              </span>
+            </div>
+            <div class="boss-hp-bar">
+              <div id="boss-hp-fill" class="boss-hp-fill" style="width: 100%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+              <span>PODER CORPORATIVO DE JOJA</span>
+              <span id="boss-hp-text">1000 / 1000 PV</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="boss-dialogue-box" id="boss-speech-text">
+          "¡Saludos, habitante de Stardew Valley! Joja Corporation transformará el Centro Cívico en un almacén de JojaMart. ¡Ríndete ante el progreso!"
+        </div>
+
+        <div class="stream-container" style="min-height: 100px;">
+          <div class="stream-text" id="boss-text-stream">
+            <!-- Counter spell injected via app.js -->
+          </div>
+        </div>
+
+        <div class="keyboard-container" id="boss-keyboard-container"></div>
+      </div>
+    </main>
+
+    <!-- VIEW 7: FARMER JOURNAL NOTEBOOK (CUSTOM PRACTICE) -->
+    <main id="view-custom" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-custom">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #fbc02d; color: #fbc02d;">LA CABAÑA</span>
+          <h2 class="level-title">El Cuaderno del Granjero</h2>
+        </div>
+      </div>
+
+      <div class="custom-card">
+        <p style="color: #3e1d08; font-size: 1.05rem; line-height: 1.6; margin-bottom: 12px;">
+          Escribe o pega cualquier texto que desees practicar. El teclado resaltará cada dedo y medirá tus pulsaciones en un pergamino rústico.
+        </p>
+        <textarea id="custom-text-input" class="custom-textarea" rows="7" placeholder="Pega aquí recetas, cartas de los aldeanos o pasajes favoritos..."></textarea>
+        
+        <div class="custom-actions-row">
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #7a401b;">
+            Caracteres: <span id="custom-char-count" style="font-weight: 800; color: #3e1d08;">0</span> | Palabras: <span id="custom-word-count" style="font-weight: 800; color: #3e1d08;">0</span>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="btn-clear-custom" class="stardew-btn stardew-btn-ghost">Borrar</button>
+            <button id="btn-launch-custom" class="stardew-btn stardew-btn-primary"><span>🌾</span> <span>Comenzar a Escribir</span></button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- VIEW 7: WILLY'S FISHING PIER MINIGAME -->
+    <main id="view-fishing" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-fishing">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #0288d1; color: #0288d1;">PLAYA DE PELICAN TOWN</span>
+          <h2 class="level-title">EL MUELLE DE PESCA DE WILLY</h2>
+        </div>
+
+        <div class="stars-summary-badge" style="border-color: #0288d1;">
+          <span>🐟 Peces:</span> <strong id="fishing-catch-count" style="color: var(--stardew-gold);">0</strong>
+        </div>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🎣 <strong>Contexto Stardew:</strong> Willy es el viejo pescador del muelle. Al teclear con cadencia suave y constante, el sedal se tensa y acercas el pez al muelle sin que se corte la línea.</span>
+      </div>
+
+      <!-- Ocean & Pier Visual Theater -->
+      <div class="fishing-theater" id="fishing-theater">
+        <!-- Wooden Dock with Willy -->
+        <div class="fishing-dock">
+          <div class="willy-character" id="willy-character">
+            <div class="willy-emote" id="willy-emote">🎣</div>
+            <div class="willy-avatar" id="willy-avatar">🧔</div>
+          </div>
+          <div class="willy-speech" id="willy-speech">"¡Tensa el sedal escribiendo las letras! ¡Siento un gran pez mordiendo el anzuelo!"</div>
+        </div>
+
+        <!-- Ocean Water with Swimming Fish -->
+        <div class="fishing-ocean">
+          <div class="water-waves-fx"></div>
+          <div class="swimming-fish-wrapper" id="swimming-fish-wrapper" style="right: 15%;">
+            <div class="fish-splash" id="fish-splash"></div>
+            <div class="swimming-fish" id="swimming-fish">🐟</div>
+            <div class="fish-name-tag" id="fish-name-tag">Pez Sol (Calidad Oro)</div>
+          </div>
+        </div>
+
+        <!-- Reel Tension Gauge -->
+        <div class="reel-gauge-wrapper">
+          <div class="reel-gauge-label">
+            <span>PROGRESO DE CAPTURA</span>
+            <span id="reel-tension-val" style="color: #0288d1; font-weight: 900;">0%</span>
+          </div>
+          <div class="reel-gauge-bar">
+            <div class="reel-gauge-fill" id="reel-gauge-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Word to Reel In -->
+      <div class="fishing-word-box">
+        <div class="fishing-hint">Teclea con ritmo para tirar de la caña y enrollar el carrete:</div>
+        <div class="fishing-target-word" id="fishing-target-word">
+          <!-- Letters dynamically rendered -->
+        </div>
+      </div>
+
+      <!-- Virtual Keyboard for Fishing Pier -->
+      <div class="keyboard-container" id="fishing-keyboard-container">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </main>
+
+    <!-- VIEW 8: THE JUNIMO COMMUNITY CENTER & BUNDLES (CENTRO CÍVICO) -->
+    <main id="view-bundles" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-bundles">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #ffd700; color: #ffd700;">PELICAN TOWN // CENTRO CÍVICO</span>
+          <h2 class="level-title">Los Lotes de los Junimos</h2>
+        </div>
+
+        <div class="bundles-mantel-badge" id="bundles-mantel-badge" title="Estrellas de los Junimos en la chimenea del Centro Cívico">
+          <span>🌟 SALAS:</span>
+          <div class="mantel-stars-row" id="mantel-stars-row">
+            <span class="mantel-star" data-room="pantry" title="La Despensa">🌱</span>
+            <span class="mantel-star" data-room="crafts" title="Sala de Artesanía">🍂</span>
+            <span class="mantel-star" data-room="fishTank" title="El Acuario">🐟</span>
+            <span class="mantel-star" data-room="boiler" title="Sala de Calderas">⛏️</span>
+            <span class="mantel-star" data-room="vault" title="La Bóveda">💰</span>
+          </div>
+          <strong id="bundles-restored-count" style="color: var(--stardew-gold); margin-left: 6px;">0 / 5</strong>
+        </div>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🍏 <strong>Contexto Stardew:</strong> Los Junimos son duendecillos mágicos del bosque. Cuando les ofrendas palabras de cosechas y minerales, usan su magia para reparar los edificios del pueblo y otorgarte ventajas.</span>
+      </div>
+
+      <!-- Grand Community Center Theater -->
+      <div class="bundles-theater">
+        <!-- Room Selector Tabs -->
+        <div class="bundles-tabs-bar" id="bundles-tabs-bar">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Active Room Banner & Story -->
+        <div class="bundles-room-hero" id="bundles-room-hero">
+          <div class="room-hero-info">
+            <div class="room-hero-header">
+              <span class="room-hero-icon" id="room-hero-icon">🌱</span>
+              <div>
+                <h3 class="room-hero-title" id="room-hero-title">LA DESPENSA</h3>
+                <span class="room-hero-status" id="room-hero-status">🏚️ En ruinas — Requiere 3 ofrendas Junimo</span>
+              </div>
+            </div>
+            <p class="room-hero-story" id="room-hero-story">
+              Los pequeños espíritus del bosque esperan ofrendas de los frutos de la tierra para reparar el invernadero.
+            </p>
+          </div>
+          <div class="room-perk-box">
+            <span class="room-perk-tag">RECOMPENSA DE SALA</span>
+            <strong class="room-perk-title" id="room-perk-title">El Invernadero Restaurado</strong>
+            <p class="room-perk-desc" id="room-perk-desc">+25% de Oro ($g) en todas las cosechas y labores de la granja.</p>
+          </div>
+        </div>
+
+        <!-- 3 Parchment Bundles Grid -->
+        <div class="bundles-scroll-grid" id="bundles-scroll-grid">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Junimo Ritual Typing Arena (Interactive Parchment Scroll) -->
+        <div class="junimo-ritual-card" id="junimo-ritual-card" style="display: none;">
+          <div class="ritual-header">
+            <div class="junimo-avatar-animated" id="ritual-junimo-avatar">🍏</div>
+            <div class="ritual-dialogue-block">
+              <strong id="ritual-bundle-title" style="color: var(--stardew-gold); font-size: 1.25rem;">LOTE DE CULTIVOS DE PRIMAVERA</strong>
+              <div class="ritual-junimo-speech" id="ritual-junimo-speech">
+                "¡Squeak! Tensa tus dedos y escribe las palabras de la ofrenda sagrada para complacer a los espíritus:"
+              </div>
+            </div>
+            <button class="back-btn" id="btn-close-ritual" style="align-self: flex-start;">✕ Cancelar</button>
+          </div>
+
+          <!-- Typing Stream for Junimo Ritual -->
+          <div class="ritual-stream-box">
+            <div class="ritual-progress-row">
+              <span style="font-size: 0.85rem; font-weight: 800; color: #7a401b;">MANTRA JUNIMO:</span>
+              <span id="ritual-acc-val" style="font-family: var(--font-mono); font-size: 0.85rem; color: #73b32a; font-weight: 800;">100% Precisión</span>
+            </div>
+            <div class="stream-text" id="ritual-stream-display">
+              <!-- Rendered characters -->
+            </div>
+          </div>
+
+          <!-- Dedicated Virtual Keyboard for Junimo Ritual -->
+          <div class="keyboard-container" id="bundles-keyboard-container"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- VIEW 9: GUNTHER'S MUSEUM & LIBRARY (EL MUSEO DE PELICAN TOWN) -->
+    <main id="view-museum" class="view-panel">
+      <div class="arena-header">
+        <button class="back-btn" id="btn-back-from-museum">
+          <span>⬅</span> <span>Volver a la Granja</span>
+        </button>
+
+        <div class="level-meta-badge">
+          <span class="sector-tag" style="border-color: #c2410c; color: #ea580c;">PELICAN TOWN // BIBLIOTECA</span>
+          <h2 class="level-title">El Museo de Gunther</h2>
+        </div>
+
+        <div class="bundles-mantel-badge" id="museum-stat-badge" title="Progreso de donaciones arqueológicas al museo">
+          <span>🏺 COLECCIÓN:</span>
+          <strong id="museum-donated-stat" style="color: var(--stardew-gold); margin-left: 6px;">0 / 20</strong>
+        </div>
+      </div>
+
+      <!-- Mode Lore Callout for Beginners -->
+      <div class="mode-lore-callout">
+        <span>🏺 <strong>Contexto Stardew:</strong> Gunther es el curador del museo y la biblioteca del pueblo. ¡Excava fósiles con la azada, rompe geodas misteriosas y dona reliquias a los pedestales de terciopelo para ganar premios y la Fruta Estelar!</span>
+      </div>
+
+      <!-- Grand Museum Hall Theater -->
+      <div class="museum-hall">
+        <!-- Gunther's Welcome Desk -->
+        <div class="museum-curator-banner" id="museum-curator-banner">
+          <div class="curator-avatar">👨‍🏫</div>
+          <div class="curator-dialogue-box">
+            <div class="curator-name">GUNTHER // CURADOR DEL MUSEO</div>
+            <p class="curator-speech" id="curator-speech-text">
+              "¡Bienvenido a la biblioteca y museo de Pelican Town! Los estantes y vitrinas aguardan tus descubrimientos de la huerta, la mina y las costas. Selecciona una pieza para excavar o donar."
+            </p>
+          </div>
+          <!-- Milestones Mini-Bar -->
+          <div class="museum-milestones-row" id="museum-milestones-row">
+            <!-- Dynamic milestones: 5 (🔍), 10 (🌱), 15 (🧸), 20 (🌟) -->
+          </div>
+        </div>
+
+        <!-- Wings Tabs Bar -->
+        <div class="museum-tabs-bar" id="museum-tabs-bar">
+          <!-- 4 wings: Fossils, Minerals, Relics, Curios -->
+        </div>
+
+        <!-- Pedestals Exhibition Grid -->
+        <div class="museum-pedestals-grid" id="museum-pedestals-grid">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Excavation & Restoration Workshop Card (Interactive Typing Arena) -->
+        <div class="museum-excavation-card" id="museum-excavation-card" style="display: none;">
+          <div class="ritual-header">
+            <div class="excavation-icon-preview" id="excavation-icon-preview">🪨</div>
+            <div class="ritual-dialogue-block">
+              <span class="sector-tag" id="excavation-wing-tag" style="border-color: #ea580c; color: #ea580c;">EXCAVACIÓN ARQUEOLÓGICA</span>
+              <strong id="excavation-artifact-name" style="color: var(--stardew-gold); font-size: 1.35rem; display: block; margin-top: 4px;">HUEVO DE DINOSAURIO</strong>
+              <div class="ritual-junimo-speech" id="excavation-prompt-desc">
+                "Usa tu azada y cincel con precisión de relojero. Teclea el pasaje histórico para restaurar y donar la pieza:"
+              </div>
+            </div>
+            <button class="back-btn" id="btn-close-excavation" style="align-self: flex-start;">✕ Cancelar</button>
+          </div>
+
+          <!-- Typing Stream for Excavation -->
+          <div class="ritual-stream-box">
+            <div class="ritual-progress-row">
+              <span style="font-size: 0.85rem; font-weight: 800; color: #7a401b;">PASO DE EXCAVACIÓN:</span>
+              <span id="excavation-acc-val" style="font-family: var(--font-mono); font-size: 0.85rem; color: #73b32a; font-weight: 800;">100% Precisión</span>
+            </div>
+            <div class="stream-text" id="excavation-stream-display">
+              <!-- Rendered characters -->
+            </div>
+          </div>
+
+          <!-- Dedicated Virtual Keyboard for Excavation -->
+          <div class="keyboard-container" id="museum-keyboard-container"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL 1: HARVEST VICTORY (COSECHA COMPLETADA) -->
+    <div id="victory-modal" class="modal-backdrop">
+      <div class="stardew-modal-card">
+        <div class="modal-stardew-header">
+          <div class="junimo-celebration-icon">🌟</div>
+          <h2 class="modal-title" id="modal-victory-title">¡COSECHA COMPLETADA!</h2>
+          <p class="modal-sub" id="modal-victory-sub">El abuelo y los Junimos celebran tu gran labor agrícola.</p>
+        </div>
+
+        <!-- Stardew Valley Quality Tier Badge (Iridio, Oro, Plata, Normal) -->
+        <div class="stardew-rank-wrapper">
+          <div id="modal-rank-badge" class="stardew-quality-badge rank-sss">SSS</div>
+          <div id="modal-rank-desc" style="font-family: var(--font-display); font-size: 1.15rem; color: #7a401b; font-weight: 800; margin-top: 4px;">
+            CALIDAD IRIDIO (MÁXIMA)
+          </div>
+        </div>
+
+        <div class="modal-stats-grid">
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Velocidad</span>
+            <span class="m-stat-val" id="modal-stat-wpm" style="color: var(--stardew-gold);">45 PPM</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Precisión</span>
+            <span class="m-stat-val" id="modal-stat-acc" style="color: var(--stardew-sprout);">98%</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Racha Máx</span>
+            <span class="m-stat-val" id="modal-stat-combo" style="color: var(--stardew-gold);">x54</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Recompensa Oro</span>
+            <span class="m-stat-val" id="modal-stat-xp" style="color: var(--stardew-gold);">+150 $g</span>
+          </div>
+        </div>
+
+        <div id="modal-victory-stars" style="text-align: center; font-size: 1.6rem; color: var(--stardew-gold);">★★★★★</div>
+
+        <!-- Weak Keys Review in Modal -->
+        <div id="modal-error-keys-box" style="display: none; background: #fff; border: 2px solid #7a401b; border-radius: 8px; padding: 8px 12px; margin-top: 4px;">
+          <span style="font-size: 0.8rem; font-weight: 800; color: #e53935;">TECLAS A MEJORAR:</span>
+          <div id="modal-error-keys-list" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;"></div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button id="modal-btn-retry" class="stardew-btn stardew-btn-secondary">
+            <span>🔄</span> <span>Repetir Jornada</span>
+          </button>
+          <button id="modal-btn-next" class="stardew-btn stardew-btn-primary">
+            <span>Siguiente Tarea</span> <span>➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 2: DEFEAT / OUT OF ENERGY -->
+    <div id="defeat-modal" class="modal-backdrop">
+      <div class="stardew-modal-card" style="border-color: #e53935;">
+        <div class="modal-stardew-header">
+          <div style="font-size: 3rem; margin-bottom: 8px;">🥀</div>
+          <h2 class="modal-title" style="color: #e53935;" id="modal-defeat-title">TE QUEDASTE SIN ENERGÍA</h2>
+          <p class="modal-sub" id="modal-defeat-sub">No lograste cumplir con el objetivo mínimo de calidad de la cosecha.</p>
+        </div>
+
+        <div class="modal-stats-grid">
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Tu Velocidad</span>
+            <span class="m-stat-val" id="modal-defeat-wpm">22 PPM</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Precisión</span>
+            <span class="m-stat-val" style="color: #e53935;" id="modal-defeat-acc">84%</span>
+          </div>
+          <div class="modal-stat-box">
+            <span class="m-stat-label">Fallos</span>
+            <span class="m-stat-val" style="color: #e53935;" id="modal-defeat-errors">8</span>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <button id="modal-defeat-btn-menu" class="stardew-btn stardew-btn-secondary">
+            <span>Volver a la Granja</span>
+          </button>
+          <button id="modal-defeat-btn-retry" class="stardew-btn stardew-btn-danger">
+            <span>Reintentar con Cuidado</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 3: ACHIEVEMENTS (34 TROFEOS DE STARDEW VALLEY) -->
+    <div id="achievements-modal" class="modal-backdrop">
+      <div class="stardew-modal-card modal-wide">
+        <div class="modal-header-row">
+          <h2 class="modal-title" style="color: var(--stardew-gold); font-size: 1.8rem; display: flex; align-items: center; gap: 12px;">
+            <span>🏆</span> <span>TROFEOS Y LOGROS DEL VALLE</span>
+          </h2>
+          <button class="back-btn" id="btn-close-achievements">✕ Cerrar</button>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="color: #3e1d08; font-size: 0.95rem;">
+            Desbloquea los 34 hitos completando labores en la huerta, pescando con Willy, restaurando el Centro Cívico con los Junimos y alcanzando la perfección.
+          </span>
+          <span id="achievements-stat-text" style="font-family: var(--font-display); font-size: 1.1rem; color: #7a401b; font-weight: 800;">0 / 34</span>
+        </div>
+
+        <div style="width: 100%; height: 8px; background: #e0d0b0; border-radius: 4px; overflow: hidden; margin-bottom: 14px;">
+          <div id="achievements-progress-fill" style="width: 0%; height: 100%; background: var(--stardew-gold); transition: width 0.3s ease;"></div>
+        </div>
+
+        <div class="achievements-grid" id="achievements-container">
+          <!-- Injected dynamically via app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 4: FARMER PROFILE & STATISTICS -->
+    <div id="profile-modal" class="modal-backdrop">
+      <div class="stardew-modal-card">
+        <div class="modal-header-row">
+          <h2 class="modal-title" style="color: var(--stardew-gold); font-size: 1.8rem; display: flex; align-items: center; gap: 12px;">
+            <span>👤</span> <span>PERFIL DEL GRANJERO</span>
+          </h2>
+          <button class="back-btn" id="btn-close-profile">✕ Cerrar</button>
+        </div>
+
+        <div class="profile-stats-grid">
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Nivel de Granjero</span>
+            <span class="profile-stat-val" id="prof-level-val">1</span>
+          </div>
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Monedero ($g)</span>
+            <span class="profile-stat-val" style="color: var(--stardew-gold);" id="prof-xp-val">0 $g</span>
+          </div>
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Récord PPM</span>
+            <span class="profile-stat-val" style="color: var(--stardew-sprout);" id="prof-best-wpm">0</span>
+          </div>
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Estrellas de Calidad</span>
+            <span class="profile-stat-val" style="color: var(--stardew-gold);" id="prof-stars-val">0</span>
+          </div>
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Pulsaciones Totales</span>
+            <span class="profile-stat-val" id="prof-keys-val">0</span>
+          </div>
+          <div class="profile-stat-item">
+            <span class="profile-stat-label">Récord Rey Pradera</span>
+            <span class="profile-stat-val" style="color: var(--stardew-gold);" id="prof-arcade-val">0</span>
+          </div>
+        </div>
+
+        <div style="width: 100%; display: flex; justify-content: flex-end; margin-top: 14px;">
+          <button id="btn-reset-data" class="stardew-btn stardew-btn-secondary" style="font-size: 0.85rem; color: #e53935; border-color: rgba(229, 57, 53, 0.4);">
+            <span>⚠️</span> <span>Reiniciar Progreso de la Granja</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING TOAST NOTIFICATION (LOGRO DESBLOQUEADO) -->
+    <div id="achievement-toast" class="achievement-toast">
+      <div class="toast-icon" id="toast-icon">🏆</div>
+      <div class="toast-content">
+        <span class="toast-tag">¡NUEVO LOGRO EN STARDEW VALLEY!</span>
+        <strong class="toast-title" id="toast-title">Primer Brote de Primavera</strong>
+        <p class="toast-desc" id="toast-desc">Has cosechado tu primera pastinaca en el valle.</p>
+      </div>
+    </div>
+
+    <!-- MODAL 5: PIERRE'S GENERAL STORE -->
+    <div id="pierre-store-modal" class="modal-backdrop">
+      <div class="stardew-modal-card modal-wide">
+        <div class="modal-header-row">
+          <h2 class="modal-title" style="color: var(--stardew-gold); font-size: 1.8rem; display: flex; align-items: center; gap: 12px;">
+            <span>🏪</span> <span>TIENDA GENERAL DE PIERRE</span>
+          </h2>
+          <button class="back-btn" id="btn-close-store">✕ Salir</button>
+        </div>
+
+        <div class="pierre-welcome-banner">
+          <div class="pierre-portrait">🏪</div>
+          <div class="pierre-speech">
+            <strong>Pierre:</strong> "¡Bienvenido a mi tienda! Tengo herramientas mejoradas, mejoras de velocidad, compañeros animales para tu granja y estilos cosméticos para tu teclado."
+          </div>
+          <div class="pierre-gold-badge">
+            <span>Tu Oro:</span> <strong id="store-player-gold">0</strong> <span style="color: var(--stardew-gold);">$g</span>
+          </div>
+        </div>
+
+        <div class="store-catalog-grid" id="store-catalog-container">
+          <!-- Injected dynamically via app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 6: PELICAN TOWN BULLETIN BOARD (DAILY QUESTS) -->
+    <div id="quests-modal" class="modal-backdrop">
+      <div class="stardew-modal-card">
+        <div class="modal-header-row">
+          <h2 class="modal-title" style="color: #7a401b; font-size: 1.8rem; display: flex; align-items: center; gap: 12px;">
+            <span>📜</span> <span>TABLÓN DE ANUNCIOS DE PELICAN TOWN</span>
+          </h2>
+          <button class="back-btn" id="btn-close-quests">✕ Cerrar</button>
+        </div>
+        <p style="color: #5c3014; margin-bottom: 12px; font-size: 0.95rem;">
+          Cumple los pedidos diarios del pueblo para ganar Oro ($g) fresco y acelerar el desarrollo de tu huerta.
+        </p>
+        <div class="quests-list" id="quests-container">
+          <!-- Injected dynamically via app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 7: VILLAGER DIALOGUE CUTSCENE -->
+    <div id="cutscene-modal" class="modal-backdrop">
+      <div class="stardew-cutscene-box">
+        <div class="cutscene-speaker-badge" id="cutscene-speaker">El Fantasma del Abuelo</div>
+        <div class="cutscene-body">
+          <div class="cutscene-avatar-frame" id="cutscene-avatar">👴</div>
+          <div class="cutscene-text-content">
+            <p id="cutscene-text" class="cutscene-typing-text"></p>
+          </div>
+        </div>
+        <div class="cutscene-footer">
+          <button id="btn-cutscene-continue" class="stardew-btn stardew-btn-primary">
+            <span>Continuar a la Huerta</span> <span>➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL 8: NEW FARMER'S GUIDE & LORE PRIMER (PARA TODO PÚBLICO) -->
+    <div id="guide-modal" class="modal-backdrop">
+      <div class="stardew-modal-card modal-wide guide-modal-card">
+        <div class="modal-header-row">
+          <h2 class="modal-title" style="color: var(--stardew-gold); font-size: 1.8rem; display: flex; align-items: center; gap: 12px;">
+            <span>📖</span> <span>GUÍA DEL GRANJERO // HISTORIA & CÓMO JUGAR</span>
+          </h2>
+          <button class="back-btn" id="btn-close-guide-top">✕ Cerrar</button>
+        </div>
+
+        <p style="color: #5c3014; font-size: 0.98rem; margin-bottom: 14px;">
+          ¡Bienvenido! No necesitas haber jugado nunca a <strong>Stardew Valley</strong> para disfrutar este viaje. Aquí tienes todo lo necesario para entender la historia, los personajes y aprender a escribir sin mirar las teclas.
+        </p>
+
+        <!-- Guide Tabs Selector -->
+        <div class="guide-tabs-bar" id="guide-tabs-bar">
+          <button class="guide-tab-btn active" data-guide-tab="story">🌾 La Historia del Valle</button>
+          <button class="guide-tab-btn" data-guide-tab="lore">👥 Quién es Quién (Personajes)</button>
+          <button class="guide-tab-btn" data-guide-tab="typing">⌨️ Cómo Colocar los Dedos</button>
+          <button class="guide-tab-btn" data-guide-tab="modes">🎮 Guía de Modos de Juego</button>
+        </div>
+
+        <!-- Guide Tab 1: Story -->
+        <div class="guide-tab-panel active" id="guide-panel-story">
+          <div class="guide-story-hero">
+            <div class="guide-story-icon">🏡</div>
+            <div class="guide-story-intro">
+              <h3 style="color: #3e1d08; font-family: var(--font-display); font-size: 1.45rem;">¿De qué trata este mundo?</h3>
+              <p style="color: #5c3014; font-size: 0.95rem; line-height: 1.5;">
+                En <em>Stardew Valley</em>, eres una persona cansada del estrés y la rutina gris de la ciudad. Un día abres un sobre lacrado que te dejó tu querido abuelo antes de partir: <strong>¡has heredado su vieja parcela rústica en Pelican Town!</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="guide-features-grid">
+            <div class="guide-feature-box">
+              <span class="guide-box-icon">🌱</span>
+              <h4>La Huerta y el Teclado</h4>
+              <p>Tu teclado físico es tu caja de herramientas. Cada letra correcta equivale a remover la maleza, regar un surco de tierra o cosechar patatas y fresas. Cuanto más practiques, más crecerá tu huerta.</p>
+            </div>
+            <div class="guide-feature-box">
+              <span class="guide-box-icon">💼</span>
+              <h4>La Amenaza: Joja Corporation</h4>
+              <p>Una fría megacorporación llamada <em>JojaMart</em> quiere comprar el pueblo y pavimentar los campos con almacenes de cemento. Escribir con fluidez y precisión es tu magia para revitalizar la comunidad y expulsarlos.</p>
+            </div>
+            <div class="guide-feature-box">
+              <span class="guide-box-icon">🕊️</span>
+              <h4>El Ritmo de la Naturaleza</h4>
+              <p>No se trata de golpear teclas con violencia, sino de encontrar un ritmo sereno y constante, como las cuatro estaciones: primavera, verano, otoño e invierno.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Tab 2: Lore & Characters -->
+        <div class="guide-tab-panel" id="guide-panel-lore">
+          <div class="guide-characters-grid">
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">🍏</div>
+              <div class="guide-char-info">
+                <strong>Los Junimos (Espíritus del Bosque)</strong>
+                <p>Pequeños seres mágicos con forma de manzana. Viven en el viejo Centro Cívico. Si les ofrendas palabras de cosechas, usarán su magia para reparar el pueblo.</p>
+              </div>
+            </div>
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">👴</div>
+              <div class="guide-char-info">
+                <strong>El Fantasma del Abuelo</strong>
+                <p>Tu mentor espiritual. Te vigila con cariño desde las estrellas y te recuerda siempre mantener la calma y guiarte por el tacto sin bajar la mirada.</p>
+              </div>
+            </div>
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">💼</div>
+              <div class="guide-char-info">
+                <strong>Morris (Gerente de JojaMart)</strong>
+                <p>El villano codicioso. Intenta convencer a los aldeanos de que el progreso son los cupones de descuento y los supermercados grises. ¡Derrótalo con tus palabras!</p>
+              </div>
+            </div>
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">🎣</div>
+              <div class="guide-char-info">
+                <strong>Willy (El Pescador)</strong>
+                <p>Un viejo lobo de mar bondadoso del muelle. Te enseña que tanto en la pesca como en el teclado, la clave es no desesperar y mantener una cadencia constante.</p>
+              </div>
+            </div>
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">🏪</div>
+              <div class="guide-char-info">
+                <strong>Pierre (El Tendero)</strong>
+                <p>El comerciante de semillas. Te paga Oro ($g) por cada tarea completada para que compres regaderas de cobre, cañas mejores y mascotas leales.</p>
+              </div>
+            </div>
+            <div class="guide-char-card">
+              <div class="guide-char-avatar">💜</div>
+              <div class="guide-char-info">
+                <strong>Calidad Iridio (¿Qué significa?)</strong>
+                <p>En Stardew Valley los productos tienen calidad Normal, Plata, Oro y la suprema: <strong>Iridio (púrpura)</strong>. En el juego, se obtiene al lograr 100% de precisión perfecta.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Tab 3: Touch Typing How-to -->
+        <div class="guide-tab-panel" id="guide-panel-typing">
+          <div class="guide-typing-columns">
+            <div class="guide-typing-step">
+              <div class="step-num">1</div>
+              <h4>La Fila Guía (Home Row)</h4>
+              <p>Tus dedos deben descansar siempre en la fila central: <strong>ASDF</strong> (mano izquierda) y <strong>JKLÑ</strong> (mano derecha). Cada dedo parte de ahí y regresa allí tras pulsar una tecla.</p>
+            </div>
+            <div class="guide-typing-step">
+              <div class="step-num">2</div>
+              <h4>Las Marcas en F y J</h4>
+              <p>Toca las teclas <strong>F</strong> y <strong>J</strong> en tu teclado físico. Notarás dos pequeñas rayitas en relieve. Pon tus dedos índices sobre ellas: <em>¡esa es tu brújula para orientarte a ciegas!</em></p>
+            </div>
+            <div class="guide-typing-step">
+              <div class="step-num">3</div>
+              <h4>Colores por Dedo</h4>
+              <p>En el teclado en pantalla, cada columna tiene el color de un dedo: meñiques (rosa/rojo), anulares (ámbar), medios (amarillo), índices (verdes) y pulgares (espacio).</p>
+            </div>
+            <div class="guide-typing-step">
+              <div class="step-num">4</div>
+              <h4>¿PPM y Precisión?</h4>
+              <p><strong>PPM</strong> son <em>Palabras Por Minuto</em>. 30-40 es normal para empezar; 70+ es veloz; y 100+ es nivel experto. <strong>La regla de oro:</strong> prioriza no equivocarte antes de correr.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide Tab 4: Game Modes -->
+        <div class="guide-tab-panel" id="guide-panel-modes">
+          <div class="guide-modes-summary-grid">
+            <div class="guide-mode-item">
+              <span class="m-icon">🌱</span>
+              <div>
+                <strong>01. Tareas de la Huerta</strong>
+                <p>100 niveles progresivos dedo por dedo desde cero. La escuela principal de mecanografía.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">💀</span>
+              <div>
+                <strong>02. Caverna Calavera</strong>
+                <p>Contrarreloj infinito de reflejos: Empiezas con 30s de antorcha; cada roca picada te suma +3s.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">🤠</span>
+              <div>
+                <strong>03. Rey de la Pradera</strong>
+                <p>El arcade retro de la taberna: dispara a forajidos tecleando antes de que toquen tu valla.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">🏛️</span>
+              <div>
+                <strong>04. Jefe: Morris & Joja</strong>
+                <p>Combate contra el gerente corporativo en 8 fases críticas escribiendo conjuros botánicos.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">🐎</span>
+              <div>
+                <strong>05. Carrera y Festival</strong>
+                <p>Test de velocidad campestre de 60 segundos con relatos de las cuatro estaciones.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">📖</span>
+              <div>
+                <strong>06. El Cuaderno Libre</strong>
+                <p>Pega cualquier texto que quieras practicar libremente al lado de la chimenea.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">🎣</span>
+              <div>
+                <strong>07. Pesca de Willy</strong>
+                <p>Tensa el sedal al compás del carrete escribiendo palabras marinas para pescar peces raros.</p>
+              </div>
+            </div>
+            <div class="guide-mode-item">
+              <span class="m-icon">🍏</span>
+              <div>
+                <strong>08. Centro Cívico Junimo</strong>
+                <p>Restaura las 5 salas históricas entregando ofrendas mágicas para desbloquear ventajas permanentes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 18px; border-top: 2px dashed #b86f34; padding-top: 14px;">
+          <button id="btn-close-guide" class="stardew-btn stardew-btn-primary" style="padding: 10px 24px; font-size: 1.15rem;">
+            <span>¡Entendido, a la Huerta!</span> <span>➔</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING INTERACTIVE FARM MASCOT & PETS WIDGET -->
+    <div id="farm-mascot-widget" class="farm-mascot-widget">
+      <div id="mascot-speech-bubble" class="mascot-speech-bubble">
+        <span id="mascot-speech-text">¡Cluck! 🐔 ¡Bienvenido al valle! Recuerda apoyar los dedos en F y J.</span>
+      </div>
+      <div class="mascot-sprites-row">
+        <button id="btn-mascot-chicken" class="mascot-btn mascot-chicken-btn" title="Acariciar a la gallina (¡Cluck!)">🐔</button>
+        <button id="btn-mascot-dog" class="mascot-btn mascot-pet-btn" style="display: none;" title="Acariciar al perrito (¡Guau!)">🐶</button>
+        <button id="btn-mascot-cat" class="mascot-btn mascot-pet-btn" style="display: none;" title="Acariciar al gatito (¡Miau!)">🐱</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Game Scripts (ES Modules) -->
+  <script type="module" src="js/game/app.js"></script>
+</body>
+</html>
