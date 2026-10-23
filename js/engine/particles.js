@@ -73,7 +73,39 @@ class StardewParticleSystem {
   }
 
   triggerShake(intensity = 6) {
-    this.shakeIntensity = Math.max(this.shakeIntensity, intensity);
+    // Screen shaking is disabled to provide a comfortable, non-jittery experience.
+    this.shakeIntensity = 0;
+    if (typeof document !== 'undefined' && document.body && document.body.style.transform && document.body.style.transform !== 'none') {
+      document.body.style.transform = 'none';
+    }
+  }
+
+  // Celebratory completion effect (Junimo star shower, golden sparkles, completion banner)
+  triggerCompletionEffect(x = this.width / 2, y = this.height / 2 - 80, label = '¡COMPLETADO!') {
+    this.burstJunimo(x, y);
+    this.burst(x, y - 20, '#ffd700', 30);
+    this.addFloatingText(`✨ ${label} ✨`, x, y - 30, '#ffd700', 28);
+  }
+
+  // Gentle, calm error indicator (soft localized red ember puff, NO screen shake)
+  triggerErrorEffect(x = this.width / 2, y = this.height / 2 - 80) {
+    for (let i = 0; i < 6; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 1.5 + 0.5;
+      this.particles.push({
+        x: x + (Math.random() - 0.5) * 16,
+        y: y + (Math.random() - 0.5) * 10,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 0.5,
+        size: Math.random() * 3 + 1.5,
+        color: '#ff5252',
+        alpha: 0.8,
+        decay: 0.04,
+        rotation: 0,
+        vRot: 0,
+        isLeaf: false
+      });
+    }
   }
 
   // Magical Junimo Star Shower on high combos
@@ -151,16 +183,9 @@ class StardewParticleSystem {
   }
 
   update() {
-    // Gentle screen shake on error or mining
-    if (this.shakeIntensity > 0) {
-      const shakeX = (Math.random() - 0.5) * this.shakeIntensity;
-      const shakeY = (Math.random() - 0.5) * this.shakeIntensity;
-      document.body.style.transform = `translate(${shakeX}px, ${shakeY}px)`;
-      this.shakeIntensity *= 0.85;
-      if (this.shakeIntensity < 0.4) {
-        this.shakeIntensity = 0;
-        document.body.style.transform = 'none';
-      }
+    // Screen shaking completely disabled. Ensure body transform is clean.
+    if (typeof document !== 'undefined' && document.body && document.body.style.transform && document.body.style.transform !== 'none') {
+      document.body.style.transform = 'none';
     }
 
     // Update Ambient Fireflies & Drifting Pollen

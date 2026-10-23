@@ -111,16 +111,9 @@ class StardewParticleSystem {
   }
 
   update() {
-    // Gentle screen shake on error or mining
-    if (this.shakeIntensity > 0) {
-      const shakeX = (Math.random() - 0.5) * this.shakeIntensity;
-      const shakeY = (Math.random() - 0.5) * this.shakeIntensity;
-      document.body.style.transform = \`translate(\${shakeX}px, \${shakeY}px)\`;
-      this.shakeIntensity *= 0.85;
-      if (this.shakeIntensity < 0.4) {
-        this.shakeIntensity = 0;
-        document.body.style.transform = 'none';
-      }
+    // Screen shaking completely disabled. Ensure body transform is clean.
+    if (typeof document !== 'undefined' && document.body && document.body.style.transform && document.body.style.transform !== 'none') {
+      document.body.style.transform = 'none';
     }
 
     // Update Ambient Fireflies & Drifting Pollen

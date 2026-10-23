@@ -29,7 +29,7 @@ const IGNORED_INPUT_KEYS = new Set([
   'Shift', 'CapsLock', 'Control', 'Alt', 'AltGraph', 'Meta',
   'Escape', 'Dead', 'ContextMenu', 'ArrowLeft', 'ArrowRight',
   'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown',
-  'NumLock', 'ScrollLock', 'Insert', 'Tab', 'F1', 'F2', 'F3', 'F4',
+  'NumLock', 'ScrollLock', 'Insert', 'Tab', 'Backspace', 'F1', 'F2', 'F3', 'F4',
   'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'
 ]);
 
@@ -609,7 +609,8 @@ class CyberTypeApp {
       card.addEventListener('click', () => {
         if (!isUnlocked) {
           audio.playError();
-          particles.triggerShake(6);
+          card.classList.add('error-shake');
+          setTimeout(() => card.classList.remove('error-shake'), 300);
           this.showAchievementToast({
             icon: '🔒',
             name: 'Nivel Bloqueado',
@@ -817,7 +818,6 @@ class CyberTypeApp {
           // Glitch screen interference in glitch mode
           if (diff === 'glitch' && this.hardcoreTimeLeft > 0 && this.hardcoreTimeLeft % 5 === 0) {
             audio.playGlitch();
-            particles.triggerShake(8);
             const arenaBox = document.getElementById('view-arena');
             if (arenaBox) {
               arenaBox.classList.add('screen-glitch-fx');
@@ -863,11 +863,11 @@ class CyberTypeApp {
         setTimeout(() => keyEl.classList.remove('is-hit'), 150);
       }
 
-      // Combo Milestone Chimes
+      // Combo Milestone Chimes (Festive Junimo Star Shower, No Screen Tremor)
       if (this.combo === 10 || this.combo === 25 || this.combo === 50 || this.combo === 100) {
         audio.playComboChime(Math.floor(this.combo / 20) + 1);
-        particles.triggerShake(4);
-        particles.addFloatingText(`COMBO x${this.combo}!`, window.innerWidth / 2, window.innerHeight / 2 - 80, '#ffe600', 26);
+        particles.burstJunimo(window.innerWidth / 2, window.innerHeight / 2 - 80);
+        particles.addFloatingText(`✨ ¡RACHA x${this.combo}! ✨`, window.innerWidth / 2, window.innerHeight / 2 - 80, '#ffe600', 28);
       }
 
       // Character step-hop animation & emote burst
@@ -905,9 +905,14 @@ class CyberTypeApp {
       this.errorsCount++;
       this.combo = 0;
       audio.playError();
-      particles.triggerShake(6);
       gameState.recordKey(targetChar, true);
       this.triggerCharacterEmote('💦');
+
+      const streamBox = document.getElementById('text-stream-display');
+      if (streamBox) {
+        streamBox.classList.add('error-shake');
+        setTimeout(() => streamBox.classList.remove('error-shake'), 250);
+      }
 
       // Record in session key errors for diagnostics
       if (!this.sessionKeyErrors[targetChar]) this.sessionKeyErrors[targetChar] = 0;
@@ -919,7 +924,6 @@ class CyberTypeApp {
       if (diff === 'suddendeath') {
         this.isArenaFinished = true;
         clearInterval(this.timerInterval);
-        particles.triggerShake(16);
         const modal = document.getElementById('defeat-modal');
         document.getElementById('modal-defeat-title').textContent = "🥚 ¡EL HUEVO DE IRIDIO SE HA QUEBRADO!";
         document.getElementById('modal-defeat-sub').textContent = "Cometiste 1 tropiezo en las teclas. En este desafío se exige el 100% de precisión perfecta.";
@@ -1133,6 +1137,9 @@ class CyberTypeApp {
       }
       this.updatePlayerHUD();
 
+      // Celebratory completion effect (Junimo star shower, golden sparkles, floating completion banner)
+      particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 80, `¡COSECHA COMPLETADA! +${xpEarned} $g`);
+
       // Character & Shipping Bin celebration
       const runner = document.getElementById('runner-character-wrapper');
       if (runner) {
@@ -1275,7 +1282,7 @@ class CyberTypeApp {
     };
 
     audio.playComboChime(2);
-    particles.triggerShake(5);
+    particles.burstJunimo(window.innerWidth / 2, window.innerHeight / 2 - 80);
     this.startLevel(drillLesson);
   }
 
@@ -1406,8 +1413,13 @@ class CyberTypeApp {
         this.survivalMultiplier = +(1.0 + Math.floor(this.survivalWordsCleared / 5) * 0.2).toFixed(1);
 
         audio.playTimeBonus();
-        particles.triggerShake(5);
-        particles.addFloatingText(`+${bonus.toFixed(1)}s!`, window.innerWidth / 2, window.innerHeight / 2 - 100, '#00ff88', 26);
+        particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 100, `+${bonus.toFixed(1)}s MINERAL EXTRAÍDO`);
+
+        const sWord = document.getElementById('survival-word-display');
+        if (sWord) {
+          sWord.classList.add('completion-glow');
+          setTimeout(() => sWord.classList.remove('completion-glow'), 500);
+        }
 
         const wordsVal = document.getElementById('survival-words-val');
         if (wordsVal) wordsVal.textContent = this.survivalWordsCleared;
@@ -1423,9 +1435,15 @@ class CyberTypeApp {
       // Error in survival!
       this.survivalTimer = Math.max(0, this.survivalTimer - 2.0);
       audio.playError();
-      particles.triggerShake(8);
       particles.addFloatingText("-2.0s!", window.innerWidth / 2, window.innerHeight / 2 - 80, '#ff0055', 24);
       gameState.recordKey(expectedChar, true);
+
+      const sWord = document.getElementById('survival-word-display');
+      if (sWord) {
+        sWord.classList.add('error-shake');
+        setTimeout(() => sWord.classList.remove('error-shake'), 250);
+      }
+
       this.updateSurvivalTimerUI();
       if (this.survivalTimer <= 0) {
         this.gameOverSurvival();
@@ -1631,9 +1649,13 @@ class CyberTypeApp {
           }
 
           audio.playVictory();
-          particles.triggerShake(10);
-          particles.burst(window.innerWidth / 2, window.innerHeight / 2 - 80, '#0288d1', 30);
-          particles.addFloatingText(`¡${this.fishingCurrentFish.name} ATRAPADO! +${this.fishingCurrentFish.xp} $g`, window.innerWidth / 2, window.innerHeight / 2 - 120, '#ffeb3b', 28);
+          particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 80, `🎣 ¡${this.fishingCurrentFish.name.toUpperCase()} CAPTURADO! +${this.fishingCurrentFish.xp} $g`);
+
+          const fWord = document.getElementById('fishing-target-word');
+          if (fWord) {
+            fWord.classList.add('completion-glow');
+            setTimeout(() => fWord.classList.remove('completion-glow'), 600);
+          }
 
           gameState.addXp(this.fishingCurrentFish.xp);
           this.updatePlayerHUD();
@@ -1970,9 +1992,7 @@ class CyberTypeApp {
     }
 
     audio.playJunimoDance();
-    particles.triggerShake(8);
-    particles.burst(window.innerWidth / 2, window.innerHeight / 2 - 60, '#73b32a', 40);
-    particles.addFloatingText(`¡OFRENDA COMPLETADA! +${bundle.rewardGold} $g`, window.innerWidth / 2, window.innerHeight / 2 - 100, '#ffd700', 28);
+    particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 80, `¡OFRENDA JUNIMO COMPLETADA! +${bundle.rewardGold} $g`);
 
     this.cancelBundleRitual();
     this.updatePlayerHUD();
@@ -2277,9 +2297,7 @@ class CyberTypeApp {
     gameState.addXp(artifact.goldReward || 150);
 
     audio.playMuseumFanfare();
-    particles.triggerShake(10);
-    particles.burst(window.innerWidth / 2, window.innerHeight / 2 - 60, '#ea580c', 50);
-    particles.addFloatingText(`¡ARTEFACTO DONADO: ${artifact.name.toUpperCase()}! +${artifact.goldReward} $g`, window.innerWidth / 2, window.innerHeight / 2 - 100, '#ffd700', 26);
+    particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 80, `¡ARTEFACTO DONADO: ${artifact.name.toUpperCase()}! +${artifact.goldReward} $g`);
 
     const speechEl = document.getElementById('curator-speech-text');
     if (speechEl) {
@@ -2402,7 +2420,6 @@ class CyberTypeApp {
       // Check breach
       if (item.y >= dangerY) {
         audio.playError();
-        particles.triggerShake(12);
         particles.burst(item.x, item.y, '#ff0055', 20);
         item.el.remove();
         this.arcadeWords.splice(i, 1);
@@ -2457,7 +2474,6 @@ class CyberTypeApp {
       if (target.typedIndex >= target.text.length) {
         // Destroyed!
         audio.playLaser(0, 150);
-        particles.triggerShake(5);
         particles.burst(rect.left + rect.width / 2, rect.top + rect.height / 2, '#00ff88', 25);
         target.el.remove();
         const idx = this.arcadeWords.indexOf(target);
@@ -2469,7 +2485,6 @@ class CyberTypeApp {
       }
     } else {
       audio.playError();
-      particles.triggerShake(4);
       gameState.recordKey(expectedChar, true);
     }
   }
@@ -2559,7 +2574,6 @@ class CyberTypeApp {
     document.getElementById('boss-counter-timer').textContent = `${this.bossTimer}s`;
 
     audio.playBossAttack();
-    particles.triggerShake(6);
 
     this.renderBossTextStream();
 
@@ -2571,7 +2585,6 @@ class CyberTypeApp {
 
       if (this.bossTimer <= 3) {
         audio.playError();
-        particles.triggerShake(4);
       }
 
       if (this.bossTimer <= 0) {
@@ -2621,16 +2634,20 @@ class CyberTypeApp {
         this.updateBossHpUI();
 
         audio.playLaser(0, 200);
-        particles.triggerShake(10);
-        particles.addFloatingText(`-${damage} DAÑO A NÚCLEO`, window.innerWidth / 2, window.innerHeight / 2 - 120, '#ff0055', 28);
+        particles.triggerCompletionEffect(window.innerWidth / 2, window.innerHeight / 2 - 120, `🌿 ¡CONJURO EXITOSO! -${damage} HP`);
 
         this.bossPhase++;
         setTimeout(() => this.nextBossPhase(), 1200);
       }
     } else {
       audio.playError();
-      particles.triggerShake(5);
       gameState.recordKey(expected, true);
+
+      const bStream = document.getElementById('boss-text-stream');
+      if (bStream) {
+        bStream.classList.add('error-shake');
+        setTimeout(() => bStream.classList.remove('error-shake'), 250);
+      }
 
       const diff = gameState.data.difficulty || 'normal';
       if (diff === 'suddendeath') {

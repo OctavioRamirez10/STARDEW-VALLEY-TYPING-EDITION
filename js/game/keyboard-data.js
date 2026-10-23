@@ -199,9 +199,30 @@ export function createKeyCharMap(layoutRows) {
     'Ú': { key: 'U', finger: 'right-index', code: 'KeyU' },
     'à': { key: 'a', finger: 'left-pinky', code: 'KeyA' },
     'è': { key: 'e', finger: 'left-middle', code: 'KeyE' },
+    'ê': { key: 'e', finger: 'left-middle', code: 'KeyE' },
+    'ë': { key: 'e', finger: 'left-middle', code: 'KeyE' },
+    'î': { key: 'i', finger: 'right-middle', code: 'KeyI' },
+    'ï': { key: 'i', finger: 'right-middle', code: 'KeyI' },
+    'ô': { key: 'o', finger: 'right-ring', code: 'KeyO' },
+    'ö': { key: 'o', finger: 'right-ring', code: 'KeyO' },
+    'û': { key: 'u', finger: 'right-index', code: 'KeyU' },
+    'ü': { key: 'u', finger: 'right-index', code: 'KeyU' },
+    'Ü': { key: 'U', finger: 'right-index', code: 'KeyU' },
     'ã': { key: 'a', finger: 'left-pinky', code: 'KeyA' },
     'õ': { key: 'o', finger: 'right-ring', code: 'KeyO' },
-    'ç': { key: 'c', finger: 'right-pinky', code: 'Backslash' }
+    'ñ': { key: 'ñ', finger: 'right-pinky', code: 'Semicolon' },
+    'Ñ': { key: 'Ñ', finger: 'right-pinky', code: 'Semicolon' },
+    'ç': { key: 'ç', finger: 'right-pinky', code: 'Backslash' },
+    'Ç': { key: 'Ç', finger: 'right-pinky', code: 'Backslash' },
+    '#': { key: '#', finger: 'left-middle', code: 'Digit3' },
+    '~': { key: '~', finger: 'left-index', code: 'Digit4' },
+    '|': { key: '|', finger: 'left-pinky', code: 'Digit1' },
+    '@': { key: '@', finger: 'left-ring', code: 'Digit2' },
+    '\\': { key: '\\', finger: 'left-pinky', code: 'Backquote' },
+    '[': { key: '[', finger: 'right-pinky', code: 'BracketLeft' },
+    ']': { key: ']', finger: 'right-pinky', code: 'BracketRight' },
+    '{': { key: '{', finger: 'right-pinky', code: 'Quote' },
+    '}': { key: '}', finger: 'right-pinky', code: 'Backslash' }
   };
-  return { ...map, ...accentsMap };
+  return { ...accentsMap, ...map };
 }

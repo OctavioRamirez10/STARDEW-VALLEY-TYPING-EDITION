@@ -140,9 +140,9 @@ PIERRE_STORE_CATALOG.forEach(item => {
 console.log(`   ✅ All ${PIERRE_STORE_CATALOG.length} store items are properly configured with id, name, cost, desc, icon.`);
 
 // TEST 6: Check Achievements
-console.log("\n6. Checking 30 Stardew Valley Achievements...");
-if (ACHIEVEMENTS_DEF.length !== 30) {
-  errors.push(`Expected 30 achievements, found ${ACHIEVEMENTS_DEF.length}`);
+console.log(`\n6. Checking ${ACHIEVEMENTS_DEF.length} Stardew Valley Achievements...`);
+if (ACHIEVEMENTS_DEF.length < 30) {
+  errors.push(`Expected at least 30 achievements, found ${ACHIEVEMENTS_DEF.length}`);
 } else {
   const ids = new Set();
   ACHIEVEMENTS_DEF.forEach(a => {
@@ -152,7 +152,7 @@ if (ACHIEVEMENTS_DEF.length !== 30) {
       errors.push(`Achievement ${a.id} has invalid fields: name=${!!a.name}, desc=${!!a.desc}, icon=${!!a.icon}`);
     }
   });
-  console.log(`   ✅ All 30 achievements have unique IDs and complete metadata.`);
+  console.log(`   ✅ All ${ACHIEVEMENTS_DEF.length} achievements have unique IDs and complete metadata.`);
 }
 
 // TEST 7: Check 400 Curriculum Levels

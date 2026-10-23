@@ -2716,14 +2716,50 @@ body[data-season="winter"] .navbar {
   opacity: 0.7;
 }
 
+/* Smooth Error Pulse: Localized glowing red aura, zero screen tremor */
+.error-shake,
 .fishing-target-word.error-shake {
-  animation: shakeWord 0.25s ease-in-out;
+  animation: errorPulse 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-@keyframes shakeWord {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
+@keyframes errorPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.7);
+    border-color: #e53935;
+  }
+  50% {
+    box-shadow: 0 0 18px 4px rgba(229, 57, 53, 0.85);
+    border-color: #e53935;
+    background-color: rgba(229, 57, 53, 0.12);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 57, 53, 0);
+    border-color: inherit;
+    background-color: transparent;
+  }
+}
+
+/* Radiant Completion Glow: Warm golden-green celebration aura when finishing objectives */
+.completion-glow,
+.fishing-target-word.completion-glow {
+  animation: completionPulse 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes completionPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(115, 179, 42, 0.8);
+    border-color: #73b32a;
+  }
+  50% {
+    box-shadow: 0 0 24px 6px rgba(255, 215, 0, 0.9);
+    border-color: #ffd700;
+    background-color: rgba(255, 215, 0, 0.16);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(115, 179, 42, 0);
+    border-color: inherit;
+    background-color: transparent;
+  }
 }
 
 .fish-splash {
